@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/../cmdlb/cmdlb/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../cmdlb/cmdlb/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmdlb/home/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../cmdlb/home/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,13 +40,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gitignore" value="42" />
+          <entry key="gitignore" value="44" />
           <entry key="py" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="42" />
+          <entry key="PLAIN_TEXT" value="44" />
           <entry key="Python" value="7" />
         </counts>
       </usages-collector>
@@ -105,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -133,6 +134,23 @@
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/Magnific-Popup-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/bootstrap-treeview-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/chartist-plugin-tooltip-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/dropify/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/dropzone-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/flot/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/holderjs/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/jquery-asColorPicker-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/jquery-steps-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/jquery-wizard-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/jqueryui/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/jsgrid/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/morrisjs/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/select2/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/sidebar-nav/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/tablesaw-master/package.json" />
+      <path value="$PROJECT_DIR$/pedigree_demo/static/assets/plugins/typeahead.js-master/package.json" />
       <path value="$PROJECT_DIR$/templates/assets/plugins/Magnific-Popup-master/package.json" />
       <path value="$PROJECT_DIR$/templates/assets/plugins/bootstrap-treeview-master/package.json" />
       <path value="$PROJECT_DIR$/templates/assets/plugins/chartist-plugin-tooltip-master/package.json" />
@@ -177,6 +195,11 @@
               <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
               <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -190,6 +213,9 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pedigree_demo/static" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />
     </key>
@@ -322,7 +348,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
         </state>
       </provider>
     </entry>
