@@ -1,0 +1,9 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+pedigree_demo/local_settings.py
+db.sqlite3
+venv/
+templates/
