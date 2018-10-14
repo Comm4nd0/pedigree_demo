@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Pedigree</a></li>
+                <li class="breadcrumb-item"><a href="/">Search</a></li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <button class="btn pull-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
+            </button>
+            {#            <div class="dropdown pull-right m-r-10 hidden-sm-down">#}
+            {#                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"#}
+            {#                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+            {#                    January 2017#}
+            {#                </button>#}
+            {#                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+            {#                    <a class="dropdown-item" href="#">February 2017</a>#}
+            {#                    <a class="dropdown-item" href="#">March 2017</a>#}
+            {#                    <a class="dropdown-item" href="#">April 2017</a>#}
+            {#                </div>#}
+            {#            </div>#}
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+
+    <div class="container">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Search for a pedigree</h4>
+                    <h6 class="card-subtitle">Use the search box below to type your query.</h6>
+                    <form class="floating-labels m-t-40" method="POST" action="{% url 'results' %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group m-b-40">
+                            <input type="text" class="form-control input-lg" name="search" id="search" required><span
+                                class="bar"></span>
+                            <label for="input8">Search...</label>
+                            <br>
+                            {% if error %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{ error }}<strong>{{ search_string }}</strong>.
+                                </div>
+                            {% endif %}
+                            <button type="submit" class="btn btn-outline-success">Success</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pt-5">
+        <h4>Breeders</h4>
+        <input class="form-control" id="breedersInput" type="text" placeholder="Search..">
+        <br>
+        <ul class="list-group list-group-flush" id="breedersList">
+            {% for breeder in breeders.all %}
+                <button type="button" class="list-group-item list-group-item-action"
+                        onclick="javascript:{document.getElementById('{{ breeder.id }}').submit()}">{{ breeder.prefix }}</button>
+                <form id="{{ breeder.id }}" method="POST" action="{% url 'breeder' breeder.prefix %}">
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#breedersInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#breedersList button").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

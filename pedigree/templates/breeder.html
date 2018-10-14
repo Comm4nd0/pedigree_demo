@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container pt-5">
+        <h2 class="featurette-heading">{{ breeder_details }} breeders details</h2>
+
+        <dl class="row">
+            <dt class="col-sm-3">Contact name</dt>
+            <dd class="col-sm-9">{{ breeder_details.contact_name }}</dd>
+            <dt class="col-sm-3">Address</dt>
+            <dd class="col-sm-9">{{ breeder_details.address }}</dd>
+            <dt class="col-sm-3">Phone 1</dt>
+            <dd class="col-sm-9">{{ breeder_details.phone_number1 }}</dd>
+            <dt class="col-sm-3">Phone 2</dt>
+            <dd class="col-sm-9">{{ breeder_details.phone_number2 }}</dd>
+            <dt class="col-sm-3">email</dt>
+            <dd class="col-sm-9"><a href="mailto:{{ breeder_details.email }}">{{ breeder_details.email }}</a></dd>
+        </dl>
+        <h4>Goats currently owned by {{ breeder_details }}</h4>
+        <input class="form-control" id="ownerInput" type="text" placeholder="Search..">
+        <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Reg No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">DOB</th>
+                <th scope="col">DOD</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Notes</th>
+            </tr>
+            </thead>
+            <tbody id="ownerTable">
+            {% for goat in owned.all %}
+                <tr onclick="javascript:{document.getElementById('{{ goat.id }}').submit()}"
+                    style="cursor: pointer;">
+                    <th scope="row">{{ goat.reg_no }}</th>
+                    <td>{{ goat.name }}</td>
+                    <td>{{ goat.dob }}</td>
+                    <td>{{ goat.dod }}</td>
+                    <td>{{ goat.sex }}</td>
+                    <td>{{ goat.notes }}</td>
+                </tr>
+                <form id="{{ goat.id }}" method="POST" action="{% url 'results' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" id="search" value="{{ goat.reg_no }}">
+                </form>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <h4>Goats bred by {{ breeder_details }}</h4>
+        <input class="form-control" id="bredInput" type="text" placeholder="Search..">
+        <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Reg No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">DOB</th>
+                <th scope="col">DOD</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Notes</th>
+            </tr>
+            </thead>
+            <tbody id="bredTable">
+            {% for pedigree in pedigrees.all %}
+                <tr onclick="javascript:{document.getElementById('{{ pedigree.id }}').submit()}"
+                    style="cursor: pointer;">
+                    <th scope="row">{{ pedigree.reg_no }}</th>
+                    <td>{{ pedigree.name }}</td>
+                    <td>{{ pedigree.dob }}</td>
+                    <td>{{ pedigree.dod }}</td>
+                    <td>{{ pedigree.sex }}</td>
+                    <td>{{ pedigree.notes }}</td>
+                </tr>
+                <form id="{{ pedigree.id }}" method="POST" action="{% url 'results' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" id="search" value="{{ pedigree.reg_no }}">
+                </form>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#ownerInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#ownerTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $("#bredInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#bredTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+
+    </script>
+
+
+{% endblock %}

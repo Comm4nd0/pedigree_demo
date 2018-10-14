@@ -6,7 +6,7 @@ __pycache__/
 pedigree_demo/local_settings.py
 db.sqlite3
 venv/
-templates/
+/template
 /static/
 /media/
 /template/
