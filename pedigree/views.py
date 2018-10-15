@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.decorators import login_required
-from .models import Goat, Breeder
+from .models import Pedigree, Breeder
 from django.db.models import Q
 import csv
 
@@ -9,7 +9,7 @@ import csv
 def home(request):
     return render(request, 'dashboard.html')
 
-# @login_required(login_url="/members/signup")
+@login_required(login_url="/members/login")
 def search(request):
     breeders = Breeder.objects
     return render(request, 'search.html', {'breeders': breeders})
@@ -23,14 +23,14 @@ def view_from_admin(request, search_string):
     return results(request, search_string)
 
 
-# @login_required(login_url="/members/signup")
+@login_required(login_url="/members/login")
 def results(request, search_string):
     if request.POST:
         search_string = request.POST['search']
 
     # lvl 1
     try:
-        lvl1 = Goat.objects.filter(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
+        lvl1 = Pedigree.objects.filter(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
     except ObjectDoesNotExist:
         breeders = Breeder.objects
         error = "No pedigrees found using: "
@@ -47,7 +47,7 @@ def results(request, search_string):
                                                          'search_string': search_string})
 
     try:
-        lvl1 = Goat.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
+        lvl1 = Pedigree.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
     except ObjectDoesNotExist:
         breeders = Breeder.objects
         error = "No pedigrees found using: "
@@ -60,14 +60,14 @@ def results(request, search_string):
     data['lvl1'] = lvl1
 
     try:
-        lvl2_1 = Goat.objects.get(name=lvl1.dam)
+        lvl2_1 = Pedigree.objects.get(reg_no=lvl1.parent_mother)
         data['lvl2_1'] = lvl2_1
 
     except:
         data['lvl2_1'] = ''
 
     try:
-        lvl2_2 = Goat.objects.get(name=lvl1.sire)
+        lvl2_2 = Pedigree.objects.get(reg_no=lvl1.parent_father)
         data['lvl2_2'] = lvl2_2
 
 
@@ -77,7 +77,7 @@ def results(request, search_string):
     # lvl 3
     # 1
     try:
-        lvl3_1 = Goat.objects.get(name=lvl2_1.dam)
+        lvl3_1 = Pedigree.objects.get(name=lvl2_1.parent_mother)
         data['lvl3_1'] = lvl3_1
 
     except:
@@ -85,7 +85,7 @@ def results(request, search_string):
 
     # 2
     try:
-        lvl3_2 = Goat.objects.get(name=lvl2_1.sire)
+        lvl3_2 = Pedigree.objects.get(name=lvl2_1.parent_father)
         data['lvl3_2'] = lvl3_2
 
     except:
@@ -93,7 +93,7 @@ def results(request, search_string):
 
     # 3
     try:
-        lvl3_3 = Goat.objects.get(name=lvl2_2.dam)
+        lvl3_3 = Pedigree.objects.get(name=lvl2_2.parent_mother)
         data['lvl3_3'] = lvl3_3
 
     except:
@@ -101,7 +101,7 @@ def results(request, search_string):
 
     # 4
     try:
-        lvl3_4 = Goat.objects.get(name=lvl2_2.sire)
+        lvl3_4 = Pedigree.objects.get(name=lvl2_2.parent_father)
         data['lvl3_4'] = lvl3_4
 
     except:
@@ -110,23 +110,23 @@ def results(request, search_string):
     return render(request, 'results.html', data)
 
 
-# @login_required(login_url="/members/signup")
+@login_required(login_url="/members/login")
 def breeder(request, breeder):
     breeder_details = Breeder.objects.get(prefix=breeder)
-    pedigrees = Goat.objects.filter(breeder__prefix__exact=breeder)
-    owned = Goat.objects.filter(current_owner__prefix__exact=breeder)
+    pedigrees = Pedigree.objects.filter(breeder__prefix__exact=breeder)
+    owned = Pedigree.objects.filter(current_owner__prefix__exact=breeder)
     return render(request, 'breeder.html', {'breeder_details': breeder_details,
                                             'pedigrees': pedigrees,
                                             'owned': owned})
 
 
-# @login_required(login_url="/members/signup")
+@login_required(login_url="/members/login")
 def breeders(request):
     breeders = Breeder.objects
     return render(request, 'breeders.html', {'breeders': breeders})
 
 
-# @login_required(login_url="/members/signup")
+@login_required(login_url="/members/login")
 def goat_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
@@ -137,40 +137,28 @@ def goat_csv(request):
                      'current_owner',
                      'reg_no',
                      'name',
+                     'date_of_registration'
                      'dob',
                      'dod',
                      'sex',
-                     'sire',
-                     'dam',
+                     'parent_father',
+                     'Parent_mother',
                      'notes',
-                     'image',
-                     'min_milk_yield',
-                     'max_milk_yield',
-                     'avg_milk_yield',
-                     'height_to_withers',
-                     'first_prize',
-                     'second_prize',
-                     'third_prize'])
-    goat = Goat.objects
+                     'image',])
+    goat = Pedigree.objects
     for row in goat.all():
         writer.writerow([row.breeder,
                          row.current_owner,
                          row.reg_no,
                          row.name,
+                         row.date_of_registration,
                          row.dob,
                          row.dod,
                          row.sex,
-                         row.sire,
-                         row.dam,
+                         row.parent_father,
+                         row.parent_mother,
                          row.notes,
-                         row.image,
-                         row.min_milk_yield,
-                         row.max_milk_yield,
-                         row.avg_milk_yield,
-                         row.height_to_withers,
-                         row.first_prize,
-                         row.second_prize,
-                         row.third_prize])
+                         row.image,])
 
     return response
 

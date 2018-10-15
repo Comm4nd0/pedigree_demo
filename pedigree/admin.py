@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Goat, Breeder
+from .models import Pedigree, Breeder
 from django.urls import reverse
 
 
-class GoatAdmin(admin.ModelAdmin):
+class PedigreeAdmin(admin.ModelAdmin):
     list_display = ('reg_no', 'name', 'breeder', 'notes')
     list_display_links = ('name', 'breeder', 'reg_no')
     list_filter = ('date_of_registration', 'breeder', 'current_owner')
@@ -12,18 +12,18 @@ class GoatAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
     fields = (('breeder', 'current_owner'),
               ('reg_no', 'name'),
-              ('date_of_registration', 'dob', 'dod'),
+              ('date_of_registration'),
+              ('dob'),
+              ('dod'),
               'sex',
-              ('sire', 'dam'),
+              ('parent_father', 'parent_mother'),
               'notes',
-              'image',
-              ('min_milk_yield', 'max_milk_yield', 'avg_milk_yield'),
-              ('first_prize', 'second_prize', 'third_prize'))
+              'image',)
     save_on_top = True
 
-    def view_on_site(self, Goat):
-        url = reverse('preview', kwargs={'reg_no': Goat.reg_no})
-        return 'http://35.178.2.225' + url
+    # def view_on_site(self, Pedigree):
+    #     url = reverse('preview', kwargs={'reg_no': Pedigree.reg_no})
+    #     return 'http://localhost' + url
 
 
 class BreederAdmin(admin.ModelAdmin):
@@ -44,10 +44,10 @@ class BreederAdmin(admin.ModelAdmin):
     )
     save_on_top = True
 
-    def view_on_site(self, Breeder):
-        url = reverse('breeder', kwargs={'breeder': Breeder.prefix})
-        return 'http://35.178.2.225' + url
+    # def view_on_site(self, Breeder):
+    #     url = reverse('breeder', kwargs={'breeder': Breeder.prefix})
+    #     return 'http://localhost' + url
 
-admin.site.register(Goat, GoatAdmin)
+admin.site.register(Pedigree, PedigreeAdmin)
 
 admin.site.register(Breeder, BreederAdmin)
