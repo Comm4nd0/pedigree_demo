@@ -7,10 +7,10 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Pedigree Search</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Pedigree</a></li>
-                <li class="breadcrumb-item"><a href="/">Search</a></li>
+                <li class="breadcrumb-item active">Search</li>
             </ol>
         </div>
         <div class="col-md-6 col-4 align-self-center">
@@ -60,31 +60,5 @@
             </div>
         </div>
     </div>
-    <div class="container pt-5">
-        <h4>Breeders</h4>
-        <input class="form-control" id="breedersInput" type="text" placeholder="Search..">
-        <br>
-        <ul class="list-group list-group-flush" id="breedersList">
-            {% for breeder in breeders.all %}
-                <button type="button" class="list-group-item list-group-item-action"
-                        onclick="javascript:{document.getElementById('{{ breeder.id }}').submit()}">{{ breeder.prefix }}</button>
-                <form id="{{ breeder.id }}" method="POST" action="{% url 'breeder' breeder.prefix %}">
-                    {% csrf_token %}
-                    <input type="hidden">
-                </form>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <script>
-        $(document).ready(function () {
-            $("#breedersInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#breedersList button").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
 
 {% endblock %}

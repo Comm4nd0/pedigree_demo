@@ -2,1084 +2,172 @@
 
 {% block content %}
 
-    <div class="row">
-        <!-- 1st column -->
-        <div class="d-flex align-items-center">
+
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">First Generation</h4>
                     <h6 class="card-subtitle"></h6>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl1.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl1.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl1_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl1.breeder }}</button>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info" role="tab"><span
+                                class="hidden-sm-up"><i class="ti-home"></i></span> <span
+                                class="hidden-xs-down">Info</span></a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bio" role="tab"><span
+                                class="hidden-sm-up"><i class="ti-user"></i></span> <span
+                                class="hidden-xs-down">Bio</span></a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#breeder" role="tab"><span
+                                class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Breeder</span></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#owner" role="tab"><span
+                                class="hidden-sm-up"><i class="ti-email"></i></span> <span
+                                class="hidden-xs-down">Owner</span></a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabcontent-border">
+                        <div class="tab-pane active" id="info" role="tabpanel">
+                            <div class="p-20">
+                                {% if lvl1.image %}
+                                    <div class="el-card-avatar el-overlay-1">
+                                        <a class="image-popup-vertical-fit" href="{{ lvl1.image.url }}"> <img
+                                                src="{{ lvl1.image.url }}"
+                                                alt="{{ lvl1.image.url }}" style="max-width: 300px"/>
                                         </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl1.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl1_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl1.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl1.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOR</th>
-                                <td>{{ lvl1.date_of_registration }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl1.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOD</th>
-                                <td>{{ lvl1.dod }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- 2nd column -->
-        <div class="col-lg-3">
-            <div class="d-flex align-items-center">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Second Generation</h4>
-                        <h6 class="card-subtitle">Mother</h6>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th scope="row">Reg No.</th>
-                                    <td>{{ lvl2_1.reg_no }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Breeder</th>
-                                    <td>
-                                        {% if lvl2_1.breeder %}
-                                            <a href="javascript:{document.getElementById('lvl2_1_breeder').submit()}">
-                                                <button class="btn btn-info btn-sm btn-block">
-                                                    {{ lvl2_1.breeder }}</button>
-                                            </a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Owner</th>
-                                    <td>
-                                        {% if lvl2_1.current_owner %}
-                                            <a href="javascript:{document.getElementById('lvl2_1_owner').submit()}">
-                                                <button class="btn btn-info btn-sm btn-block">
-                                                    {{ lvl2_1.current_owner }}</button>
-                                            </a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Name</th>
-                                    <td>{{ lvl2_1.name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DOR</th>
-                                    <td>{{ lvl2_1.date_of_registration }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DOB</th>
-                                    <td>{{ lvl2_1.dob }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DOD</th>
-                                    <td>{{ lvl2_1.dod }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Second Generation</h4>
-                        <h6 class="card-subtitle">Mother</h6>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <th scope="row">Reg No.</th>
-                                    <td>{{ lvl2_1.reg_no }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Breeder</th>
-                                    <td>
-                                        {% if lvl2_1.breeder %}
-                                            <a href="javascript:{document.getElementById('lvl2_1_breeder').submit()}">
-                                                <button class="btn btn-info btn-sm btn-block">
-                                                    {{ lvl2_1.breeder }}</button>
-                                            </a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Owner</th>
-                                    <td>
-                                        {% if lvl2_1.current_owner %}
-                                            <a href="javascript:{document.getElementById('lvl2_1_owner').submit()}">
-                                                <button class="btn btn-info btn-sm btn-block">
-                                                    {{ lvl2_1.current_owner }}</button>
-                                            </a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Name</th>
-                                    <td>{{ lvl2_1.name }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DOR</th>
-                                    <td>{{ lvl2_1.date_of_registration }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DOB</th>
-                                    <td>{{ lvl2_1.dob }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DOD</th>
-                                    <td>{{ lvl2_1.dod }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center bg-light pt-4">
-            {#first row#}
-            <div class="row">
-                <div class="col-lg-12">
-
-                    {% if lvl1.image %}
-                        <img id="lvl1_img" src="{{ lvl1.image.url }}" alt="{{ lvl1.name }}"
-                             class="img-fluid img-thumbnail"
-                             style="width:100%;max-width:150px">
-                        <div id="lvl1_Modal" class="modal">
-                            <span class="close">&times;</span>
-                            <img class="modal-content" id="img1">
-                            <div id="caption"></div>
-                        </div>
-
-                        <script>
-                            // Get the modal
-                            var modal = document.getElementById('lvl1_Modal');
-                            // Get the image and insert it inside the modal - use its "alt" text as a caption
-                            var img = document.getElementById('lvl1_img');
-                            var modalImg = document.getElementById("img1");
-                            var captionText = document.getElementById("caption");
-                            img.onclick = function () {
-                                modal.style.display = "block";
-                                modalImg.src = this.src;
-                                modalImg.style.maxWidth = "50%";
-                                captionText.innerHTML = this.alt;
-                            }
-                            // Get the <span> element that closes the modal
-                            var span = document.getElementsByClassName("close")[0];
-                            // When the user clicks on <span> (x), close the modal
-                            span.onclick = function () {
-                                modal.style.display = "none";
-                            }
-                        </script>
-                    {% endif %}
-
-                    <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                        <tbody>
-                        <tr>
-                            <th scope="row">Reg No.</th>
-                            <td>{{ lvl1.reg_no }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Breeder</th>
-                            <td>
-                                {% if lvl1.breeder %}
-                                    <a href="javascript:{document.getElementById('lvl1_breeder').submit()}">
-                                        <button class="btn btn-info btn-sm btn-block">
-                                            {{ lvl1.breeder }}</button>
-                                    </a>
+                                    </div>
                                 {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Owner</th>
-                            <td>
-                                {% if lvl1.current_owner %}
-                                    <a href="javascript:{document.getElementById('lvl1_owner').submit()}">
-                                        <button class="btn btn-info btn-sm btn-block">
-                                            {{ lvl1.current_owner }}</button>
-                                    </a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Name</th>
-                            <td>{{ lvl1.name }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">DOB</th>
-                            <td>{{ lvl1.dob }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Min milk yield</th>
-                            <td>{{ lvl1.min_milk_yield }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Max milk yield</th>
-                            <td>{{ lvl1.max_milk_yield }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Avg milk yield</th>
-                            <td>{{ lvl1.avg_milk_yield }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Height to withers</th>
-                            <td>{{ lvl1.height_to_withers }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">First prize</th>
-                            <td>{% if lvl1.first_prize %}
-                                <i class="fas fa-award"></i>
-                            {% else %}
-                            {% endif %}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Second prize</th>
-                            <td>{% if lvl1.second_prize %}
-                                <i class="fas fa-award"></i>
-                            {% else %}
-                            {% endif %}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Third prize</th>
-                            <td>{% if lvl1.third_prize %}
-                                <i class="fas fa-award"></i>
-                            {% else %}
-                            {% endif %}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <strong>Dam:</strong> {{ lvl1.dam }} | <strong>Sire:</strong> {{ lvl1.sire }}
-                    <div class="inline-group text-center">
-                        <svg>
-                            <polyline points="0,50 50,0 100,50" style="fill:none;stroke:black;stroke-width:3px"/>
-                            /\
-                        </svg>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Reg No.</th>
+                                            <td>{{ lvl1.reg_no }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Name</th>
+                                            <td>{{ lvl1.name }}</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane p-20" id="bio" role="tabpanel">2</div>
+                        <div class="tab-pane p-20" id="breeder" role="tabpanel">
+                            {% if lvl1.breeder %}
+                                <a href="javascript:{document.getElementById('lvl1_breeder').submit()}">
+                                    <button class="btn btn-info btn-sm btn-block">
+                                        {{ lvl1.breeder }}</button>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="tab-pane p-20" id="owner" role="tabpanel">
+                            {% if lvl1.current_owner %}
+                                <a href="javascript:{document.getElementById('lvl1_owner').submit()}">
+                                    <button class="btn btn-info btn-sm btn-block">
+                                        {{ lvl1.current_owner }}</button>
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {#second row#}
-            <div class="row">
-                <div class="col-lg-6">
-                    {% if lvl2_1.reg_no %}
-                        {% if lvl2_1.image %}
-                            <img id="lvl2_1_img" src="{{ lvl2_1.image.url }}" alt="{{ lvl2_1.name }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="width:100%;max-width:150px">
-                            <div id="lvl2_1_Modal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img2_1">
-                                <div id="caption"></div>
-                            </div>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('lvl2_1_Modal');
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('lvl2_1_img');
-                                var modalImg = document.getElementById("img2_1");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function () {
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    modalImg.style.maxWidth = "50%";
-                                    captionText.innerHTML = this.alt;
-                                }
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                }
-                            </script>
-                        {% endif %}
-                        <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl2_1.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl2_1.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl2_1_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl2_1.breeder }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl2_1.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl2_1_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl2_1.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl2_1.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl2_1.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Min milk yield</th>
-                                <td>{{ lvl2_1.min_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Max milk yield</th>
-                                <td>{{ lvl2_1.max_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Avg milk yield</th>
-                                <td>{{ lvl2_1.avg_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Height to withers</th>
-                                <td>{{ lvl2_1.height_to_withers }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First prize</th>
-                                <td>{% if lvl2_1.first_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Second prize</th>
-                                <td>{% if lvl2_1.second_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third prize</th>
-                                <td>{% if lvl2_1.third_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <strong>Dam:</strong> {{ lvl2_1.dam }} | <strong>Sire:</strong> {{ lvl2_1.sire }}
-                        <div class="inline-group text-center">
-                            <svg>
-                                <polyline points="0,50 50,0 100,50" style="fill:none;stroke:black;stroke-width:3px"/>
-                                /\
-                            </svg>
-                        </div>
-                    {% endif %}
-                </div>
-
-                <div class="col-lg-6">
-                    {% if lvl2_2.reg_no %}
-                        {% if lvl2_2.image %}
-                            <img id="lvl2_2_img" src="{{ lvl2_2.image.url }}" alt="{{ lvl2_2.name }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="width:100%;max-width:150px">
-                            <div id="lvl2_2_Modal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img2_2">
-                                <div id="caption"></div>
-                            </div>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('lvl2_2_Modal');
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('lvl2_2_img');
-                                var modalImg = document.getElementById("img2_2");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function () {
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    modalImg.style.maxWidth = "50%";
-                                    captionText.innerHTML = this.alt;
-                                }
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                }
-                            </script>
-                        {% endif %}
-                        <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl2_2.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl2_2.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl2_2_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl2_2.breeder }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl2_2.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl2_2_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl2_2.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl2_2.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl2_2.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Min milk yield</th>
-                                <td>{{ lvl2_2.min_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Max milk yield</th>
-                                <td>{{ lvl2_2.max_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Avg milk yield</th>
-                                <td>{{ lvl2_2.avg_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Height to withers</th>
-                                <td>{{ lvl2_2.height_to_withers }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First prize</th>
-                                <td>{% if lvl2_2.first_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Second prize</th>
-                                <td>{% if lvl2_2.second_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third prize</th>
-                                <td>{% if lvl2_2.third_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <strong>Dam:</strong> {{ lvl2_2.dam }} | <strong>Sire:</strong> {{ lvl2_2.sire }}
-                        <div class="inline-group text-center">
-                            <svg>
-                                <polyline points="0,50 50,0 100,50" style="fill:none;stroke:black;stroke-width:3px"/>
-                                /\
-                            </svg>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-
-            {#third row#}
-            <div class="row">
-                <div class="col-lg-3">
-                    {% if lvl3_1.reg_no %}
-                        {% if lvl3_1_image %}
-                            <img id="lvl3_1_img" src="{{ lvl3_1.image.url }}" alt="{{ lvl3_1.name }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="width:100%;max-width:150px">
-                            <div id="lvl3_1_Modal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img3_1">
-                                <div id="caption"></div>
-                            </div>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('lvl3_1_Modal');
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('lvl3_1_img');
-                                var modalImg = document.getElementById("img3_1");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function () {
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    modalImg.style.maxWidth = "50%";
-                                    captionText.innerHTML = this.alt;
-                                }
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                }
-                            </script>
-                        {% endif %}
-                        <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl3_1.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl3_1.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl3_1_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_1.breeder }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl3_1.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl3_1_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_1.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl3_1.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl3_1.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Min milk yield</th>
-                                <td>{{ lvl3_1.min_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Max milk yield</th>
-                                <td>{{ lvl3_1.max_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Avg milk yield</th>
-                                <td>{{ lvl3_1.avg_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Height to withers</th>
-                                <td>{{ lvl3_1.height_to_withers }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First prize</th>
-                                <td>{% if lvl3_1.first_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Second prize</th>
-                                <td>{% if lvl3_1.second_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third prize</th>
-                                <td>{% if lvl3_1.third_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <strong>Dam:</strong> {{ lvl3_1.dam }} |<strong>Sire:</strong> {{ lvl3_1.sire }}
-                    {% endif %}
-                </div>
-
-                <div class="col-lg-3">
-                    {% if lvl3_2.reg_no %}
-                        {% if lvl3_2.image %}
-                            <img id="lvl3_2_img" src="{{ lvl3_2.image.url }}" alt="{{ lvl3_2.name }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="width:100%;max-width:150px">
-                            <div id="lvl3_2_Modal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img3_2">
-                                <div id="caption"></div>
-                            </div>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('lvl3_2_Modal');
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('lvl3_2_img');
-                                var modalImg = document.getElementById("img3_2");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function () {
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    modalImg.style.maxWidth = "50%";
-                                    captionText.innerHTML = this.alt;
-                                }
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                }
-                            </script>
-                        {% endif %}
-                        <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl3_2.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl3_2.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl3_2_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_2.breeder }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl3_2.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl3_2_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_2.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl3_2.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl3_2.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Min milk yield</th>
-                                <td>{{ lvl3_2.min_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Max milk yield</th>
-                                <td>{{ lvl3_2.max_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Avg milk yield</th>
-                                <td>{{ lvl3_2.avg_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Height to withers</th>
-                                <td>{{ lvl3_2.height_to_withers }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First prize</th>
-                                <td>{% if lvl3_2.first_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Second prize</th>
-                                <td>{% if lvl3_2.second_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third prize</th>
-                                <td>{% if lvl3_2.third_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <strong>Dam:</strong> {{ lvl3_2.dam }} | <strong>Sire:</strong> {{ lvl3_2.sire }}
-                    {% endif %}
-                </div>
-                <div class="col-lg-3">
-                    {% if lvl3_3.reg_no %}
-                        {% if lvl3_3.image %}
-                            <img id="lvl3_3_img" src="{{ lvl3_3.image.url }}" alt="{{ lvl3_3.name }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="width:100%;max-width:150px">
-                            <div id="lvl3_3_Modal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img3_3">
-                                <div id="caption"></div>
-                            </div>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('lvl3_3_Modal');
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('lvl3_3_img');
-                                var modalImg = document.getElementById("img3_3");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function () {
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    modalImg.style.maxWidth = "50%";
-                                    captionText.innerHTML = this.alt;
-                                }
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                }
-                            </script>
-                        {% endif %}
-                        <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl3_3.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl3_3.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl3_3_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_3.breeder }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl3_3.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl3_3_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_3.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl3_3.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl3_3.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Min milk yield</th>
-                                <td>{{ lvl3_3.min_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Max milk yield</th>
-                                <td>{{ lvl3_3.max_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Avg milk yield</th>
-                                <td>{{ lvl3_3.avg_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Height to withers</th>
-                                <td>{{ lvl3_3.height_to_withers }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First prize</th>
-                                <td>{% if lvl3_3.first_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Second prize</th>
-                                <td>{% if lvl3_3.second_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third prize</th>
-                                <td>{% if lvl3_3.third_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <strong>Dam:</strong> {{ lvl3_3.dam }} | <strong>Sire:</strong> {{ lvl3_3.sire }}
-                    {% endif %}
-                </div>
-
-                <div class="col-lg-3">
-                    {% if lvl3_4.reg_no %}
-                        {% if lvl3_4.image %}
-                            <img id="lvl3_4_img" src="{{ lvl3_4.image.url }}" alt="{{ lvl3_4.name }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="width:100%;max-width:150px">
-                            <div id="lvl3_4_Modal" class="modal">
-                                <span class="close">&times;</span>
-                                <img class="modal-content" id="img3_4">
-                                <div id="caption"></div>
-                            </div>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('lvl3_4_Modal');
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('lvl3_4_img');
-                                var modalImg = document.getElementById("img3_4");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function () {
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    modalImg.style.maxWidth = "50%";
-                                    captionText.innerHTML = this.alt;
-                                }
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                }
-                            </script>
-                        {% endif %}
-                        <table class="table table-striped table-sm" style="max-width: 300px" align="center">
-                            <tbody>
-                            <tr>
-                                <th scope="row">Reg No.</th>
-                                <td>{{ lvl3_4.reg_no }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Breeder</th>
-                                <td>
-                                    {% if lvl3_4.breeder %}
-                                        <a href="javascript:{document.getElementById('lvl3_4_breeder').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_4.breeder }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Owner</th>
-                                <td>
-                                    {% if lvl3_4.current_owner %}
-                                        <a href="javascript:{document.getElementById('lvl3_4_owner').submit()}">
-                                            <button class="btn btn-info btn-sm btn-block">
-                                                {{ lvl3_4.current_owner }}</button>
-                                        </a>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Name</th>
-                                <td>{{ lvl3_4.name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">DOB</th>
-                                <td>{{ lvl3_4.dob }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Min milk yield</th>
-                                <td>{{ lvl3_4.min_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Max milk yield</th>
-                                <td>{{ lvl3_4.max_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Avg milk yield</th>
-                                <td>{{ lvl3_4.avg_milk_yield }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Height to withers</th>
-                                <td>{{ lvl3_4.height_to_withers }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First prize</th>
-                                <td>{% if lvl3_4.first_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Second prize</th>
-                                <td>{% if lvl3_4.second_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Third prize</th>
-                                <td>{% if lvl3_4.third_prize %}
-                                    <i class="fas fa-award"></i>
-                                {% else %}
-                                {% endif %}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <strong>Dam:</strong> {{ lvl3_4.dam }} | <strong>Sire:</strong> {{ lvl3_4.sire }}
-                    {% endif %}
-                </div>
-            </div>
-
         </div>
+    </div>
 
-        {% if lvl1.breeder %}
-            <form id="lvl1_breeder" method="POST" action="{% url 'breeder' lvl1.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl1.current_owner %}
-            <form id="lvl1_owner" method="POST" action="{% url 'breeder' lvl1.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
 
-        {% if lvl2_1.breeder %}
-            <form id="lvl2_1_breeder" method="POST" action="{% url 'breeder' lvl2_1.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl2_1.current_owner %}
-            <form id="lvl2_1_owner" method="POST" action="{% url 'breeder' lvl2_1.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
 
-        {% if lvl2_2.breeder %}
-            <form id="lvl2_2_breeder" method="POST" action="{% url 'breeder' lvl2_2.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl2_2.current_owner %}
-            <form id="lvl2_2_owner" method="POST" action="{% url 'breeder' lvl2_2.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
+    {% if lvl1.breeder %}
+        <form id="lvl1_breeder" method="POST" action="{% url 'breeder' lvl1.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl1.current_owner %}
+        <form id="lvl1_owner" method="POST" action="{% url 'breeder' lvl1.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
 
-        {% if lvl3_1.breeder %}
-            <form id="lvl3_1_breeder" method="POST" action="{% url 'breeder' lvl3_1.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl3_1.current_owner %}
-            <form id="lvl3_1_owner" method="POST" action="{% url 'breeder' lvl3_1.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
+    {% if lvl2_1.breeder %}
+        <form id="lvl2_1_breeder" method="POST" action="{% url 'breeder' lvl2_1.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl2_1.current_owner %}
+        <form id="lvl2_1_owner" method="POST" action="{% url 'breeder' lvl2_1.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
 
-        {% if lvl3_2.breeder %}
-            <form id="lvl3_2_breeder" method="POST" action="{% url 'breeder' lvl3_2.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl3_2.current_owner %}
-            <form id="lvl3_2_owner" method="POST" action="{% url 'breeder' lvl3_2.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
+    {% if lvl2_2.breeder %}
+        <form id="lvl2_2_breeder" method="POST" action="{% url 'breeder' lvl2_2.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl2_2.current_owner %}
+        <form id="lvl2_2_owner" method="POST" action="{% url 'breeder' lvl2_2.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
 
-        {% if lvl3_3.breeder %}
-            <form id="lvl3_3_breeder" method="POST" action="{% url 'breeder' lvl3_3.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl3_3.current_owner %}
-            <form id="lvl3_3_owner" method="POST" action="{% url 'breeder' lvl3_3.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
+    {% if lvl3_1.breeder %}
+        <form id="lvl3_1_breeder" method="POST" action="{% url 'breeder' lvl3_1.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl3_1.current_owner %}
+        <form id="lvl3_1_owner" method="POST" action="{% url 'breeder' lvl3_1.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
 
-        {% if lvl3_4.breeder %}
-            <form id="lvl3_4_breeder" method="POST" action="{% url 'breeder' lvl3_4.breeder %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
-        {% if lvl3_4.current_owner %}
-            <form id="lvl3_4_owner" method="POST" action="{% url 'breeder' lvl3_4.current_owner %}">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-        {% endif %}
+    {% if lvl3_2.breeder %}
+        <form id="lvl3_2_breeder" method="POST" action="{% url 'breeder' lvl3_2.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl3_2.current_owner %}
+        <form id="lvl3_2_owner" method="POST" action="{% url 'breeder' lvl3_2.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+
+    {% if lvl3_3.breeder %}
+        <form id="lvl3_3_breeder" method="POST" action="{% url 'breeder' lvl3_3.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl3_3.current_owner %}
+        <form id="lvl3_3_owner" method="POST" action="{% url 'breeder' lvl3_3.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+
+    {% if lvl3_4.breeder %}
+        <form id="lvl3_4_breeder" method="POST" action="{% url 'breeder' lvl3_4.breeder %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
+    {% if lvl3_4.current_owner %}
+        <form id="lvl3_4_owner" method="POST" action="{% url 'breeder' lvl3_4.current_owner %}">
+            {% csrf_token %}
+            <input type="hidden">
+        </form>
+    {% endif %}
 
 {% endblock %}
