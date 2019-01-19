@@ -5,7 +5,7 @@ Email: niravjoshi87@gmail.com
 File: scss
 */
 
-
+@import 'variable';
 /*******************
 Main sidebar
 ******************/
@@ -135,7 +135,6 @@ sidebar navigation
 ******************/
 
 .scroll-sidebar {
-    padding-bottom: 60px;
     padding-top: 30px;
 }
 
@@ -145,17 +144,18 @@ sidebar navigation
 
 .sidebar-nav {
     background: $sidebar;
+    > ul{
+        padding: 0px 0px 60px;
+    }
     ul {
         margin: 0px;
-        padding: 0px;
         li {
             list-style: none;
             a {
                 color: $sidebar-text;
                 padding: 14px 35px 14px 15px;
                 display: block;
-                font-size: 15px;
-                
+                font-size: 15px;                   
                 &.active,
                 &:hover {
                     color: $themecolor;

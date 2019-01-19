@@ -1,10 +1,4 @@
 // Dashboard 1 Morris-chart
-/*
-Template Name: Monster Admin
-Author: Themedesigner
-Email: niravjoshi87@gmail.com
-File: js
-*/
 $(function () {
     "use strict";
 Morris.Area({
@@ -262,4 +256,4 @@ Morris.Area({
                 hideHover: 'auto'
         
     });
-  });    
+ });    

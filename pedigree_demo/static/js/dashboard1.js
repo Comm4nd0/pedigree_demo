@@ -21,6 +21,7 @@ $(function () {
       {
         high: 15
         , low: 0
+        , showArea: true
         , fullWidth: true
         , plugins: [
         Chartist.plugins.tooltip()
@@ -28,13 +29,9 @@ $(function () {
         axisY: {
             onlyInteger: true
             , offset: 20
-            , showGrid: false
             , labelInterpolationFnc: function (value) {
                 return (value / 1) + 'k';
             }
-        },
-        axisX: {
-            showGrid: false
         }
         
     });
@@ -92,7 +89,7 @@ option = {
             }
         }
     }
-    , color: ["#383f48", "#009efb", "#55ce63", "#745af2"]
+    , color: ["#edf1f5", "#009efb", "#55ce63", "#745af2"]
     , calculable: false
     , series: [
         {

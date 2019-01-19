@@ -138,11 +138,11 @@ a.link:hover, a.link:focus {
 }
 
 .sidebar-nav ul li a.active {
-  color: #272c33;
+  color: #263238;
 }
 
 .sidebar-nav ul li.nav-small-cap {
-  color: #929ca0;
+  color: #90a4ae;
 }
 
 .sidebar-nav > ul > li.active > a {

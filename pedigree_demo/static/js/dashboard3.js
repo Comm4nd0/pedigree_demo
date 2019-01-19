@@ -60,7 +60,7 @@ $(function () {
         , xaxis: {
             show: false
         }
-        , colors: ["#55ce63"]
+        , colors: ["#26c6da"]
         , grid: {
             color: "#AFAFAF"
             , hoverable: true
@@ -150,11 +150,11 @@ $(function () {
     // Download count
     // ============================================================== 
     var sparklineLogin = function () {
-        $('.spark-count').sparkline([4, 5, 0, 10, 9, 12, 4, 9, 4, 5, 3, 10, 9, 12, 10, 9, 12, 4, 9], {
+        $('.spark-count').sparkline([4, 5, 9, 10, 9, 12, 4, 9, 4, 5, 3, 10, 9, 12, 10], {
             type: 'bar'
             , width: '100%'
             , height: '100'
-            , barWidth: '8'
+            , barWidth: '5'
             , resize: true
             , barSpacing: '5'
             , barColor: 'rgba(255, 255, 255, 0.3)'
@@ -234,7 +234,7 @@ option = {
             }
         }
     }
-    , color: ["#745af2", "#f62d51", "#55ce63", "#dadada"]
+    , color: ["#745af2", "#f62d51", "#26c6da", "#dadada"]
     , calculable: true
     , series: [
         {

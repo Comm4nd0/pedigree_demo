@@ -28,7 +28,7 @@ $(function () {
         }
         , axisY: {
             labelInterpolationFnc: function (value) {
-                return (value / 10000) + 'k';
+                return (value / 1000) + 'k';
             }
         }
     }).on('draw', function (data) {
@@ -54,7 +54,7 @@ $(function () {
     // ==============================================================
     jQuery('#visitfromworld').vectorMap({
         map: 'world_mill_en'
-        , backgroundColor: 'transparent'
+        , backgroundColor: '#fff'
         , borderColor: '#ccc'
         , borderOpacity: 0.9
         , borderWidth: 1
@@ -62,7 +62,7 @@ $(function () {
         , color: '#ddd'
         , regionStyle: {
             initial: {
-                fill: 'transparent'
+                fill: '#fff'
             }
         }
         , markerStyle: {

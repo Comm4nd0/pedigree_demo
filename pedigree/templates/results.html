@@ -1,9 +1,223 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .table td, .table th {
+    vertical-align: middle;
+}
+</style>
+<div class="">
+    <table class="table table-striped no-wrap">
+        <thead>
+            <tr>
+                <th>1st Generation</th>
+                <th>2nd Generation</th>
+                <th>3rd Generation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="4">
+                    <!--## col 1 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td rowspan="2">
+                    <!--## col 2 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <!--## col 4 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!--## col 4 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
 
-        <div id="infovis"></div>
-        <div id="log"></div>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    <!--## col 2 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <!--## col 4 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <!--## col 4 ##-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Default Tab</h4>
+                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="p-3">
+                                        <h3>Best Clean Tab ever</h3>
+                                        <h4>you can use it with the small code</h4>
+                                        <p>test</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
+                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
     {% if lvl1.breeder %}
         <form id="lvl1_breeder" method="POST" action="{% url 'breeder' lvl1.breeder %}">

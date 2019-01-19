@@ -70,9 +70,8 @@ File: scss
     }
     .material-icon-list-demo .icons div {
         width: 33%;
-        padding: 15px;
         display: inline-block;
-        line-height: 40px;
+        line-height: 26px;
     }
    .mini-sidebar {
         .page-wrapper{
@@ -253,5 +252,14 @@ File: scss
     }
     .chat-list li .chat-content{
         width: calc(100% - 80px);
+    }
+
+    .dataTables_wrapper {
+        .dataTables_paginate {
+            width: 100%;
+            .paginate_button {
+                padding: 0.5rem 0.5rem;
+            }
+        }
     }
 }
