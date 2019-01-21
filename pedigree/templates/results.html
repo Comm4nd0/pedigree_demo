@@ -1,219 +1,218 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <style>
-    .table td, .table th {
-    vertical-align: middle;
+td:nth-child(1) {
+vertical-align: middle;
+}
+td:nth-child(2) {
+vertical-align: middle;
+}
+.left-sidebar {
+    z-index: 10 !important;
 }
 </style>
 <div class="">
-    <table class="table table-striped no-wrap">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ lvl1.name }}</h4>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs customtab" role="tablist">
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#stats" role="tab"><span class="hidden-sm-up"><i class="ti-dashboard"></i></span> <span class="hidden-xs-down">Stats</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#images" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane p-3 active" id="profile" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4"><img src="{% for image in lvl1.images.all %}
+                                                            {% if forloop.first %}
+                                                                {{ image.image.url }}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        " class="img-responsive thumbnail mr-3">    </div>
+                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
+                            <p>
+                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane p-3" id="stats" role="tabpanel">
+                    <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-8"><span class="display-6">2376 <i class="ti-angle-down font-14 text-danger"></i></span>
+                                        <h6>Total Visits</h6></div>
+                                    <div class="col-4 align-self-center text-right  pl-0">
+                                        <div id="sparklinedash3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-8"><span class="display-6">3670 <i class="ti-angle-up font-14 text-success"></i></span>
+                                        <h6>Page Views</h6></div>
+                                    <div class="col-4 align-self-center text-right pl-0">
+                                        <div id="sparklinedash"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-8"><span class="display-6">1562 <i class="ti-angle-up font-14 text-success"></i></span>
+                                        <h6>Unique Visits</h6></div>
+                                    <div class="col-4 align-self-center text-right pl-0">
+                                        <div id="sparklinedash2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Row -->
+                                <div class="row">
+                                    <div class="col-8"><span class="display-6">35% <i class="ti-angle-down font-14 text-danger"></i></span>
+                                        <h6>Bounce Rate</h6></div>
+                                    <div class="col-4 align-self-center text-right pl-0">
+                                        <div id="sparklinedash4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row -->
+
+                </div>
+                <div class="tab-pane p-3" id="images" role="tabpanel">
+                    <div class="card-columns el-element-overlay">
+                        {% for image in lvl1.images.all %}
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1">
+                                    <a class="image-popup-vertical-fit" href="{{ image.image.url }}"> <img src="{{ image.image.url }}" alt="user" /> </a>
+                                </div>
+                                <div class="el-card-content">
+                                    <h3 class="box-title">{{ image.title }}</h3> <small>{{ image.description }}</small>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <table class="table">
         <thead>
             <tr>
-                <th>1st Generation</th>
-                <th>2nd Generation</th>
-                <th>3rd Generation</th>
+                <th>Parents</th>
+                <th>Grandparents</th>
+                <th>Great Grandparents</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <!--## col1 ##-->
                 <td rowspan="4">
-                    <!--## col 1 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td rowspan="2">
-                    <!--## col 2 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <!--## col 4 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <!--## col 4 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
+                    <!--cell text-->
+                    <p>
+                        <span class="mytooltip tooltip-effect-1"><span class="tooltip-item2"><i class="icon-symble-female"> {{ lvl2_1.name }}</i></span>
+                            <span class="tooltip-content4 clearfix">
+                                <span class="tooltip-text2">
+                                    <a href="javascript:document.getElementById('{{ lvl2_1.id }}').submit()"><strong>{{ lvl2_1.name }}</strong></a>
+                                       <!--hover text-->
 
-            </tr>
-            <tr>
-                <td rowspan="2">
-                    <!--## col 2 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <!--## col 4 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
 
+                                </span>
+                            </span>
+                        </span>
+                    </p>
+                    <form id="{{ lvl2_1.id }}" method="POST" action="{% url 'results' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" id="search" value="{{ lvl2_1.reg_no }}">
+                </form>
+                </td>
+                <!--## col2 ##-->
+                <td rowspan="2">test1</td>
+                <!--## col3 ##-->
+                <td>test1</td>
             </tr>
             <tr>
-                <td>
-                    <!--## col 4 ##-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Default Tab</h4>
-                            <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
-                                    <div class="p-3">
-                                        <h3>Best Clean Tab ever</h3>
-                                        <h4>you can use it with the small code</h4>
-                                        <p>test</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane  p-3" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane p-3" id="messages" role="tabpanel">3</div>
-                            </div>
-                        </div>
-                    </div>
+                <!--## col3 ##-->
+                <td>test2</td>
+            </tr>
+            <tr>
+                <!--## col2 ##-->
+                <td rowspan="2">test3</td>
+                <!--## col3 ##-->
+                <td>test3</td>
+            </tr>
+            <tr>
+                <!--## col3 ##-->
+                <td>test4</td>
+            </tr>
+            <tr>
+                <!--## col1 ##-->
+                <td rowspan="4">
+                    <!--cell text-->
+                    <p>
+                        <span class="mytooltip tooltip-effect-1"><span class="tooltip-item2"><i class="icon-symbol-male"> {{ lvl2_2.name }}</i></span>
+                            <span class="tooltip-content4 clearfix">
+                                <span class="tooltip-text2">
+                                    <a href="javascript:document.getElementById('{{ lvl2_2.id }}').submit()"><strong>{{ lvl2_2.name }}</strong></a>
+                                       <!--hover text-->
+
+
+                                </span>
+                            </span>
+                        </span>
+                    </p>
+                    <form id="{{ lvl2_2.id }}" method="POST" action="{% url 'results' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="search" id="search" value="{{ lvl2_2.reg_no }}">
                 </td>
+                <!--## col2 ##-->
+                <td rowspan="2">test5</td>
+                <!--## col3 ##-->
+                <td>test5</td>
+            </tr>
+            <tr>
+                <!--## col3 ##-->
+                <td>test6</td>
+            </tr>
+            <tr>
+                <!--## col2 ##-->
+                <td rowspan="2">test7</td>
+                <!--## col3 ##-->
+                <td>test7</td>
+            </tr>
+            <tr>
+                <!--## col3 ##-->
+                <td>test8</td>
             </tr>
         </tbody>
     </table>
@@ -309,5 +308,4 @@
             <input type="hidden">
         </form>
     {% endif %}
-
 {% endblock %}

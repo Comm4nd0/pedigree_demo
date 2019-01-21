@@ -18,9 +18,8 @@ class Breeder(models.Model):
 
 
 class Pedigree(models.Model):
-
-    breeder = models.ForeignKey(Breeder, on_delete=models.PROTECT, blank=True, null=True)
-    current_owner = models.ForeignKey(Breeder, on_delete=models.PROTECT, blank=True, null=True, related_name='+')
+    breeder = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True)
+    current_owner = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True, related_name='+')
     reg_no = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
     date_of_registration = models.DateField(blank=True)
@@ -30,19 +29,24 @@ class Pedigree(models.Model):
     GENDERS = (
         ('male', 'Male'),
         ('female', 'Female'),
-        ('unknown', 'Unknown'),
     )
 
-    sex = models.CharField(max_length=10, choices=GENDERS, default='Unknown')
+    sex = models.CharField(max_length=10, choices=GENDERS, default=None)
     parent_father = models.ForeignKey('self', related_name='farther', on_delete=models.CASCADE, blank=True, null=True)
     parent_mother = models.ForeignKey('self', related_name='mother', on_delete=models.CASCADE, blank=True, null=True)
-    notes = models.TextField(blank=True,)
-    image = models.ImageField(blank=True)
-
-    # stats
+    notes = models.TextField(blank=True)
 
     def __str__(self):
         return self.reg_no
 
 
-# class PedigreeAtributes(models.Model):
+class PedigreeImage(models.Model):
+    reg_no = models.ForeignKey(Pedigree, related_name='images', on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(blank=True)
+    title = models.CharField(max_length=100, blank=True)
+    description = models.TextField(max_length=500, blank=True)
+
+    def __str__(self):
+        return str(self.reg_no)
+
+# class PedigreeAttributes(models.Model):

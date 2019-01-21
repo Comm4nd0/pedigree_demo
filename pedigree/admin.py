@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import Pedigree, Breeder
+from .models import Pedigree, Breeder, PedigreeImage
 from django.urls import reverse
+
+
+class PedigreeImagesInline(admin.TabularInline):
+    model = PedigreeImage
+    extra = 3
 
 
 class PedigreeAdmin(admin.ModelAdmin):
@@ -17,13 +22,9 @@ class PedigreeAdmin(admin.ModelAdmin):
               ('dod'),
               'sex',
               ('parent_father', 'parent_mother'),
-              'notes',
-              'image',)
+              'notes',)
     save_on_top = True
-
-    # def view_on_site(self, Pedigree):
-    #     url = reverse('preview', kwargs={'reg_no': Pedigree.reg_no})
-    #     return 'http://localhost' + url
+    inlines = [ PedigreeImagesInline ]
 
 
 class BreederAdmin(admin.ModelAdmin):
@@ -44,10 +45,9 @@ class BreederAdmin(admin.ModelAdmin):
     )
     save_on_top = True
 
-    # def view_on_site(self, Breeder):
-    #     url = reverse('breeder', kwargs={'breeder': Breeder.prefix})
-    #     return 'http://localhost' + url
 
 admin.site.register(Pedigree, PedigreeAdmin)
 
 admin.site.register(Breeder, BreederAdmin)
+
+admin.site.register(PedigreeImage)
