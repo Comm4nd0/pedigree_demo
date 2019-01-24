@@ -1,0 +1,19 @@
+<span class="mytooltip tooltip-effect-1"><span class="tooltip-item2"><i
+        class="{% if pedigree.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"> {{ pedigree.name }}</i></span>
+        <span class="tooltip-content4 clearfix">
+            <span class="tooltip-text2">
+                <img src="{% for image in pedigree.images.all %}
+                            {% if forloop.first %}
+                                {{ image.image.url }}
+                            {% endif %}
+                        {% endfor %}" class="img-responsive thumbnail pb-2">
+                <a href="javascript:document.getElementById('{{ pedigree.id }}').submit()"
+                   class="btn btn-outline-light waves-effect waves-light" role="button">
+                    <span class="btn-label"><i class="{% if pedigree.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ pedigree.reg_no }}</strong></a>
+            </span>
+        </span>
+    </span>
+<form id="{{ pedigree.id }}" method="POST" action="{% url 'results' %}">
+    {% csrf_token %}
+    <input type="hidden" name="search" id="search" value="{{ pedigree.reg_no }}">
+</form>

@@ -21,6 +21,7 @@ vertical-align: middle;
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#stats" role="tab"><span class="hidden-sm-up"><i class="ti-dashboard"></i></span> <span class="hidden-xs-down">Stats</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#images" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#children" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Children</span></a> </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -32,9 +33,8 @@ vertical-align: middle;
                                                             {% endif %}
                                                         {% endfor %}
                                                         " class="img-responsive thumbnail mr-3">    </div>
-                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                            <p>
-                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
+                        <div class="col-md-8">
+                            {{ lvl1.description|linebreaks }}
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,29 @@ vertical-align: middle;
                             </div>
                         </div>
                         {% endfor %}
+                    </div>
                 </div>
+                <div class="tab-pane p-3" id="children" role="tabpanel">
+                    {% for child in children.all %}
+                        <div class="card" style="width: 20rem;">
+                          <img class="card-img-top" src="{% for image in child.images.all %}
+                                                            {% if forloop.first %}
+                                                                {{ image.image.url }}
+                                                            {% endif %}
+                                                        {% endfor %}" alt="Card image cap">
+                          <div class="card-body">
+                            <h4 class="card-title">{{ child.name }}</h4>
+                            <p class="card-text">{{ child.description|truncatewords:"50" }}</p>
+                            <a href="javascript:document.getElementById('{{ child.id }}').submit()"
+                               class="btn btn-outline-info waves-effect waves-light" role="button">
+                            <span class="btn-label"><i class="{% if child.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ child.reg_no }}</strong></a>
+                          </div>
+                            <form id="{{ child.id }}" method="POST" action="{% url 'results' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="search" id="search" value="{{ child.reg_no }}">
+                        </form>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -139,80 +161,130 @@ vertical-align: middle;
                 <!--## col1 ##-->
                 <td rowspan="4">
                     <!--cell text-->
-                    <p>
-                        <span class="mytooltip tooltip-effect-1"><span class="tooltip-item2"><i class="icon-symble-female"> {{ lvl2_1.name }}</i></span>
-                            <span class="tooltip-content4 clearfix">
-                                <span class="tooltip-text2">
-                                    <a href="javascript:document.getElementById('{{ lvl2_1.id }}').submit()"><strong>{{ lvl2_1.name }}</strong></a>
-                                       <!--hover text-->
-
-
-                                </span>
-                            </span>
-                        </span>
-                    </p>
-                    <form id="{{ lvl2_1.id }}" method="POST" action="{% url 'results' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="search" id="search" value="{{ lvl2_1.reg_no }}">
-                </form>
+                    {% if lvl2_1 %}
+                        {% include 'relative.html' with pedigree=lvl2_1 %}
+                    {% else %}
+                    <p>{{ no_pedigree_text }}</p>
+                        {% include 'add_new_pedigree.html' with pedigree=lvl2_1 %}
+                    {% endif %}
                 </td>
                 <!--## col2 ##-->
-                <td rowspan="2">test1</td>
+                <td rowspan="2">
+                    {% if lvl3_1 %}
+                        {% include 'relative.html' with pedigree=lvl3_1 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl3_1 %}
+                    {% endif %}
+                </td>
                 <!--## col3 ##-->
-                <td>test1</td>
+                <td>
+                    {% if lvl4_1 %}
+                        {% include 'relative.html' with pedigree=lvl4_1 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_1 %}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <!--## col3 ##-->
-                <td>test2</td>
+                <td>
+                    {% if lvl4_2 %}
+                        {% include 'relative.html' with pedigree=lvl4_2 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_2 %}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <!--## col2 ##-->
-                <td rowspan="2">test3</td>
+                <td rowspan="2">
+                    {% if lvl3_2 %}
+                        {% include 'relative.html' with pedigree=lvl3_2 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl3_2 %}
+                    {% endif %}
+                </td>
                 <!--## col3 ##-->
-                <td>test3</td>
+                <td>
+                    {% if lvl4_3 %}
+                        {% include 'relative.html' with pedigree=lvl4_3 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_3 %}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <!--## col3 ##-->
-                <td>test4</td>
+                <td>{% if lvl4_4 %}
+                        {% include 'relative.html' with pedigree=lvl4_4 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_4 %}
+                    {% endif %}</td>
             </tr>
             <tr>
                 <!--## col1 ##-->
                 <td rowspan="4">
                     <!--cell text-->
-                    <p>
-                        <span class="mytooltip tooltip-effect-1"><span class="tooltip-item2"><i class="icon-symbol-male"> {{ lvl2_2.name }}</i></span>
-                            <span class="tooltip-content4 clearfix">
-                                <span class="tooltip-text2">
-                                    <a href="javascript:document.getElementById('{{ lvl2_2.id }}').submit()"><strong>{{ lvl2_2.name }}</strong></a>
-                                       <!--hover text-->
-
-
-                                </span>
-                            </span>
-                        </span>
-                    </p>
-                    <form id="{{ lvl2_2.id }}" method="POST" action="{% url 'results' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="search" id="search" value="{{ lvl2_2.reg_no }}">
+                    {% if lvl2_2 %}
+                        {% include 'relative.html' with pedigree=lvl2_2 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl2_2 %}
+                    {% endif %}
                 </td>
                 <!--## col2 ##-->
-                <td rowspan="2">test5</td>
+                <td rowspan="2">
+                    {% if lvl3_3 %}
+                        {% include 'relative.html' with pedigree=lvl3_3 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl3_3 %}
+                    {% endif %}
+                </td>
                 <!--## col3 ##-->
-                <td>test5</td>
+                <td>
+                    {% if lvl4_5 %}
+                        {% include 'relative.html' with pedigree=lvl4_5 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_5 %}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <!--## col3 ##-->
-                <td>test6</td>
+                <td>
+                    {% if lvl4_6 %}
+                        {% include 'relative.html' with pedigree=lvl4_6 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_6 %}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <!--## col2 ##-->
-                <td rowspan="2">test7</td>
+                <td rowspan="2">
+                    {% if lvl3_4 %}
+                        {% include 'relative.html' with pedigree=lvl3_4 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl3_4 %}
+                    {% endif %}
+                </td>
                 <!--## col3 ##-->
-                <td>test7</td>
+                <td>
+                    {% if lvl4_7 %}
+                        {% include 'relative.html' with pedigree=lvl4_7 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_7 %}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <!--## col3 ##-->
-                <td>test8</td>
+                <td>
+                    {% if lvl4_8 %}
+                        {% include 'relative.html' with pedigree=lvl4_8 %}
+                    {% else %}
+                    {% include 'add_new_pedigree.html' with pedigree=lvl4_8 %}
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>

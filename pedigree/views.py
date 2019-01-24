@@ -38,11 +38,8 @@ def results(request, search_string):
                                                'error': error,
                                                'search_string': search_string})
 
-    count = 0
-    for res in lvl1.all():
-        count += 1
 
-    if count > 1:
+    if len(lvl1.all()) > 1:
         return render(request, 'multiple_results.html', {'results': lvl1,
                                                          'search_string': search_string})
 
@@ -58,6 +55,9 @@ def results(request, search_string):
     data = {}
 
     data['lvl1'] = lvl1
+
+    # get any children
+    data['children'] = Pedigree.objects.filter(Q(parent_father=lvl1))
 
     try:
         lvl2_1 = Pedigree.objects.get(reg_no=lvl1.parent_mother)

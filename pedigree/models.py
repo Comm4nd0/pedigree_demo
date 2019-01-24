@@ -22,6 +22,7 @@ class Pedigree(models.Model):
     current_owner = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True, related_name='+')
     reg_no = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
+    description = models.TextField(max_length=1000, blank=True)
     date_of_registration = models.DateField(blank=True)
     dob = models.DateField(blank=True, null=True)
     dod = models.DateField(blank=True, null=True)

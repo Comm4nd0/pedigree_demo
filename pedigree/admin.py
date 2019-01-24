@@ -17,6 +17,7 @@ class PedigreeAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
     fields = (('breeder', 'current_owner'),
               ('reg_no', 'name'),
+              ('description'),
               ('date_of_registration'),
               ('dob'),
               ('dod'),
