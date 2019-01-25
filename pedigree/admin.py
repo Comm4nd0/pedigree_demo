@@ -1,7 +1,10 @@
 from django.contrib import admin
-from .models import Pedigree, Breeder, PedigreeImage
+from .models import Pedigree, Breeder, PedigreeImage, PedigreeAttributes
 from django.urls import reverse
 
+
+class PedigreeAttributesInline(admin.StackedInline):
+    model = PedigreeAttributes
 
 class PedigreeImagesInline(admin.TabularInline):
     model = PedigreeImage
@@ -25,7 +28,7 @@ class PedigreeAdmin(admin.ModelAdmin):
               ('parent_father', 'parent_mother'),
               'notes',)
     save_on_top = True
-    inlines = [ PedigreeImagesInline ]
+    inlines = [ PedigreeAttributesInline, PedigreeImagesInline ]
 
 
 class BreederAdmin(admin.ModelAdmin):
@@ -52,3 +55,5 @@ admin.site.register(Pedigree, PedigreeAdmin)
 admin.site.register(Breeder, BreederAdmin)
 
 admin.site.register(PedigreeImage)
+
+admin.site.register(PedigreeAttributes)

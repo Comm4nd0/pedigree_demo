@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.search, name='pedigree_search'),
     path('<int:pedigree_id>', views.ShowPedigree.as_view(), name='pedigree'),
     path('results/', views.search_results, name='results'),
+    path('new_pedigree/', views.new_pedigree_form, name='new_pedigree_form'),
     # path('preview/<str:search_string>/', views.view_from_admin, name='preview'),
     path('breeder/<str:breeder>/', views.breeder, name='breeder'),
     path('breeders/', views.breeders, name='breeders'),

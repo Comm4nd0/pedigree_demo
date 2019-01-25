@@ -14,8 +14,8 @@
             </ol>
         </div>
         <div class="col-md-6 col-4 align-self-center">
-            <button class="btn pull-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
-            </button>
+            <a href="{% url 'new_pedigree_form' %}" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
+            </a>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -35,7 +35,7 @@
                         <div class="form-group m-b-40">
                             <input type="text" class="form-control input-lg" name="search" id="search" required><span
                                 class="bar"></span>
-                            <label for="input8">Search...</label>
+                            <label for="search">Search...</label>
                             <br>
                             {% if error %}
                                 <div class="alert alert-warning" role="alert">

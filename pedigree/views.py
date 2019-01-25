@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
 from .models import Pedigree, Breeder
+from .forms import PedigreeForm, AttributeForm, ImageForm
 from django.db.models import Q
 import csv
 
@@ -83,26 +84,29 @@ def search_results(request):
             breeders = Breeder.objects
             error = "No pedigrees found using: "
             return render(request, 'search.html', {'breeders': breeders,
-                                                        'error': error,
-                                                        'search_string': search_string})
+                                                    'error': error,
+                                                    'search_string': search_string})
 
 
         if len(results) > 1:
             return render(request, 'multiple_results.html', {'search_string': search_string,
                                                         'results': results})
+        else:
+            try:
+                lvl1 = Pedigree.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
+            except ObjectDoesNotExist:
+                breeders = Breeder.objects
+                error = "No pedigrees found using: "
+                return render(request, 'search.html', {'breeders': breeders,
+                                                       'error': error,
+                                                       'search_string': search_string})
 
+        return redirect('pedigree', pedigree_id=lvl1.id)
 
-        try:
-            lvl1 = Pedigree.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
-        except ObjectDoesNotExist:
-            breeders = Breeder.objects
-            error = "No pedigrees found using: "
-            return render(self.request, 'search.html', {'breeders': breeders,
-                                                   'error': error,
-                                                   'search_string': search_string})
-
-        return context
-
+def new_pedigree_form(request):
+    return render(request, 'new_pedigree_form.html', {'pedigree_form': PedigreeForm,
+                                                      'attributes_form': AttributeForm,
+                                                      'image_form': ImageForm})
 
 
 @login_required(login_url="/members/login")

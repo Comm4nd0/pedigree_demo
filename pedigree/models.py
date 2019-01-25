@@ -50,4 +50,11 @@ class PedigreeImage(models.Model):
     def __str__(self):
         return str(self.reg_no)
 
-# class PedigreeAttributes(models.Model):
+
+class PedigreeAttributes(models.Model):
+    reg_no = models.OneToOneField(Pedigree, on_delete=models.CASCADE, primary_key=True, related_name='attribute')
+    eggs_per_week = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.reg_no)
+
