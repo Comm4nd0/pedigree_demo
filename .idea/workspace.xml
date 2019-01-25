@@ -2,17 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01106d80-2e75-4c2e-81f3-4b5ea72ac208" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/add_new_pedigree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/relative.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pedigree_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pedigree_demo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedigree/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedigree/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedigree/templates/results.html" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/templates/results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedigree/templates/multiple_results.html" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/templates/multiple_results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedigree/templates/results.html" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/templates/pedigree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedigree/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedigree/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pedigree/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedigree_demo/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pedigree_demo/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedigree_demo/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/relative.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/relative.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,58 +25,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pedigree/templates/multiple_results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="133" selection-start-line="133" selection-end-line="133" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/relative.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" selection-start-line="15" selection-end-line="18" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/dark/ui-buttons.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="937" column="190" lean-forward="true" selection-start-line="937" selection-start-column="40" selection-end-line="937" selection-end-column="190" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pedigree/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="35" column="17" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pedigree/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+            <state relative-caret-position="306">
+              <caret line="54" column="49" lean-forward="true" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="n#style#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pedigree/templates/results.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pedigree/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="139" column="46" selection-start-line="139" selection-start-column="46" selection-end-line="139" selection-end-column="46" />
+            <state relative-caret-position="102">
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
               <folding>
-                <element signature="e#6917#6938#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pedigree/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+            <state relative-caret-position="544">
+              <caret line="62" column="22" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -98,19 +59,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/add_new_pedigree.html">
+        <entry file="file://$PROJECT_DIR$/pedigree/templates/search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="91" lean-forward="true" selection-start-line="1" selection-start-column="91" selection-end-line="1" selection-end-column="91" />
+            <state relative-caret-position="-52">
+              <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/dark/app-calendar.html">
+        <entry file="file://$PROJECT_DIR$/templates/relative.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="62" lean-forward="true" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+            <state relative-caret-position="238">
+              <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="222" column="64" selection-start-line="222" selection-start-column="64" selection-end-line="222" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pedigree/templates/pedigree.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/main/ui-tab.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="610" column="77" selection-start-line="610" selection-start-column="77" selection-end-line="610" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -166,7 +154,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/template/dark/table-basic.html" />
         <option value="$PROJECT_DIR$/pedigree/templates/breeders.html" />
-        <option value="$PROJECT_DIR$/pedigree/templates/search.html" />
         <option value="$PROJECT_DIR$/pedigree_demo/urls.py" />
         <option value="$PROJECT_DIR$/pedigree_demo/static/js/tree.js" />
         <option value="$PROJECT_DIR$/pedigree_demo/static/js/jit.js" />
@@ -176,15 +163,20 @@
         <option value="$PROJECT_DIR$/pedigree_demo/static/tree/base.css" />
         <option value="$PROJECT_DIR$/pedigree_demo/static/tree/example1.js" />
         <option value="$PROJECT_DIR$/pedigree/templates/dashboard.html" />
-        <option value="$PROJECT_DIR$/pedigree/templates/multiple_results.html" />
         <option value="$PROJECT_DIR$/pedigree_demo/templates/base.html" />
         <option value="$PROJECT_DIR$/pedigree/models.py" />
         <option value="$PROJECT_DIR$/pedigree/admin.py" />
         <option value="$PROJECT_DIR$/pedigree_demo/settings.py" />
         <option value="$PROJECT_DIR$/templates/add_new_pedigree.html" />
-        <option value="$PROJECT_DIR$/templates/relative.html" />
-        <option value="$PROJECT_DIR$/pedigree/views.py" />
         <option value="$PROJECT_DIR$/pedigree/templates/results.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/pedigree/templates/search.html" />
+        <option value="$PROJECT_DIR$/pedigree/views.py" />
+        <option value="$PROJECT_DIR$/pedigree/urls.py" />
+        <option value="$PROJECT_DIR$/pedigree/templates/multiple_results.html" />
+        <option value="$PROJECT_DIR$/templates/relative.html" />
+        <option value="$PROJECT_DIR$/template/main/ui-tab.html" />
+        <option value="$PROJECT_DIR$/pedigree/templates/pedigree.html" />
       </list>
     </option>
   </component>
@@ -266,11 +258,11 @@
       <path value="$PROJECT_DIR$/templates/assets/plugins/typeahead.js-master/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="644" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="648" />
     <option name="y" value="349" />
-    <option name="width" value="1272" />
-    <option name="height" value="693" />
+    <option name="width" value="1262" />
+    <option name="height" value="692" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -291,6 +283,28 @@
               <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
               <item name="pedigree" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
+              <item name="pedigree" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
+              <item name="template" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
+              <item name="template" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -370,10 +384,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="0" width="1928" height="1050" extended-state="6" />
-    <editor active="true" />
+    <frame x="648" y="349" width="1262" height="692" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27358988" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.41888618" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -387,7 +400,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3293348" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49920928" visible="true" weight="0.24074075" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49920928" visible="true" weight="0.39184397" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5007907" side_tool="true" weight="0.30827886" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -461,9 +474,6 @@
     <entry file="file://$PROJECT_DIR$/template/main/ui-user-card.html" />
     <entry file="file://$PROJECT_DIR$/template/main/table-basic.html" />
     <entry file="file://$PROJECT_DIR$/template/main/ui-tooltip-stylish.html" />
-    <entry file="file://$PROJECT_DIR$/pedigree/urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/pedigree/templates/breeder.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="577">
@@ -478,28 +488,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4980">
-          <caret line="332" selection-start-line="332" selection-end-line="334" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/main/pages-gallery.html" />
     <entry file="file://$PROJECT_DIR$/template/main/table-data-table.html" />
     <entry file="file://$PROJECT_DIR$/template/main/index4.html" />
-    <entry file="file://$PROJECT_DIR$/template/main/ui-tab.html" />
     <entry file="file://$PROJECT_DIR$/template/main/form-float-input.html" />
-    <entry file="file://$PROJECT_DIR$/template/main/app-calendar.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pedigree/templates/search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="43" column="50" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pedigree_demo/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -507,17 +499,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pedigree/templates/multiple_results.html">
+    <entry file="file://$PROJECT_DIR$/template/dark/ui-buttons.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="133" selection-start-line="133" selection-end-line="133" />
+        <state relative-caret-position="374">
+          <caret line="937" column="190" selection-start-line="937" selection-start-column="40" selection-end-line="937" selection-end-column="190" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/dark/app-calendar.html">
+    <entry file="file://$PROJECT_DIR$/pedigree/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="62" lean-forward="true" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+        <state relative-caret-position="488">
+          <caret line="36" column="17" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -531,51 +523,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/dark/ui-buttons.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="937" column="190" lean-forward="true" selection-start-line="937" selection-start-column="40" selection-end-line="937" selection-end-column="190" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/template/main/app-calendar.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/add_new_pedigree.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="91" lean-forward="true" selection-start-line="1" selection-start-column="91" selection-end-line="1" selection-end-column="91" />
+          <caret line="1" column="91" selection-start-line="1" selection-start-column="91" selection-end-line="1" selection-end-column="91" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pedigree/models.py">
+    <entry file="file://$PROJECT_DIR$/template/dark/app-calendar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="35" column="17" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="17" />
+        <state relative-caret-position="102">
+          <caret line="6" column="62" lean-forward="true" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="222" column="64" selection-start-line="222" selection-start-column="64" selection-end-line="222" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedigree/templates/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-52">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pedigree/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+        <state relative-caret-position="544">
+          <caret line="62" column="22" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/relative.html">
+    <entry file="file://$PROJECT_DIR$/pedigree/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="18" selection-end-column="7" />
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pedigree/templates/results.html">
+    <entry file="file://$PROJECT_DIR$/pedigree/templates/multiple_results.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="139" column="46" selection-start-line="139" selection-start-column="46" selection-end-line="139" selection-end-column="46" />
+        <state relative-caret-position="306">
+          <caret line="54" column="49" lean-forward="true" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
           <folding>
-            <element signature="e#6917#6938#0" expanded="true" />
+            <element signature="n#style#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/relative.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/main/ui-tab.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="610" column="77" selection-start-line="610" selection-start-column="77" selection-end-line="610" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedigree/templates/pedigree.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
         </state>
       </provider>
     </entry>

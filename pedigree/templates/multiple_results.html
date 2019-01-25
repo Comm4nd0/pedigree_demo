@@ -47,7 +47,7 @@
                     </thead>
                     <tbody id="goatTable">
                     {% for result in results.all %}
-                    <tr onclick="javascript:{document.getElementById('{{ result.id }}').submit()}"
+                    <tr onclick="window.location='{% url 'pedigree' result.id %}';"
                         style="cursor: pointer;">
                         <th scope="row">{{ result.reg_no }}</th>
                         <td>{{ result.name }}</td>
@@ -56,10 +56,6 @@
                         <td>{{ result.sex }}</td>
                         <td>{{ result.notes }}</td>
                     </tr>
-                    <form id="{{ result.id }}" method="POST" action="{% url 'results' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="search" id="search" value="{{ result.reg_no }}">
-                    </form>
                     {% endfor %}
                     </tbody>
                 </table>

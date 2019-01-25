@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.decorators import login_required
+from django.views.generic.base import TemplateView
+from django.utils.decorators import method_decorator
 from .models import Pedigree, Breeder
 from django.db.models import Q
 import csv
@@ -11,103 +13,96 @@ def home(request):
 
 @login_required(login_url="/members/login")
 def search(request):
-    breeders = Breeder.objects
-    return render(request, 'search.html', {'breeders': breeders})
+    return render(request, 'search.html')
 
 
-def search_res(request):
-    return results(request, search_string=None)
+class PedigreeBase(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['lvl1'] = Pedigree.objects.get(id=self.kwargs['pedigree_id'])
+
+        # get any children
+        context['children'] = Pedigree.objects.filter(Q(parent_father=context['lvl1']) | Q(parent_mother=context['lvl1']))
+
+        try:
+            context['lvl2_1'] = Pedigree.objects.get(reg_no=context['lvl1'].parent_mother)
+        except:
+            context['lvl2_1'] = ''
+
+        try:
+            context['lvl2_2'] = Pedigree.objects.get(reg_no=context['lvl1'].parent_father)
+        except:
+            context['lvl2_2'] = ''
+
+        # lvl 3
+        # 1
+        try:
+            context['lvl3_1'] = Pedigree.objects.get(name=context['lvl2_1'].parent_mother)
+        except:
+            context['lvl3_1'] = ''
+
+        # 2
+        try:
+            context['lvl3_2'] = Pedigree.objects.get(name=context['lvl2_1'].parent_father)
+        except:
+            context['lvl3_2'] = ''
+
+        # 3
+        try:
+            context['lvl3_3'] = Pedigree.objects.get(name=context['lvl2_2'].parent_mother)
+        except:
+            context['lvl3_3'] = ''
+
+        # 4
+        try:
+            context['lvl3_4'] = Pedigree.objects.get(name=context['lvl2_2'].parent_father)
+        except:
+            context['lvl3_4'] = ''
+
+        return context
 
 
-def view_from_admin(request, search_string):
-    return results(request, search_string)
+@method_decorator(login_required, name='dispatch')
+class ShowPedigree(PedigreeBase):
+    template_name = 'pedigree.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
-@login_required(login_url="/members/login")
-def results(request, search_string):
+def search_results(request):
     if request.POST:
         search_string = request.POST['search']
 
-    # lvl 1
-    try:
-        lvl1 = Pedigree.objects.filter(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
-    except ObjectDoesNotExist:
-        breeders = Breeder.objects
-        error = "No pedigrees found using: "
-        return render(request, 'search.html', {'breeders': breeders,
-                                               'error': error,
-                                               'search_string': search_string})
+        # lvl 1
+        try:
+            results = Pedigree.objects.filter(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
+        except ObjectDoesNotExist:
+            breeders = Breeder.objects
+            error = "No pedigrees found using: "
+            return render(request, 'search.html', {'breeders': breeders,
+                                                        'error': error,
+                                                        'search_string': search_string})
 
 
-    if len(lvl1.all()) > 1:
-        return render(request, 'multiple_results.html', {'results': lvl1,
-                                                         'search_string': search_string})
-
-    try:
-        lvl1 = Pedigree.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
-    except ObjectDoesNotExist:
-        breeders = Breeder.objects
-        error = "No pedigrees found using: "
-        return render(request, 'search.html', {'breeders': breeders,
-                                               'error': error,
-                                               'search_string': search_string})
-
-    data = {}
-
-    data['lvl1'] = lvl1
-
-    # get any children
-    data['children'] = Pedigree.objects.filter(Q(parent_father=lvl1))
-
-    try:
-        lvl2_1 = Pedigree.objects.get(reg_no=lvl1.parent_mother)
-        data['lvl2_1'] = lvl2_1
-
-    except:
-        data['lvl2_1'] = ''
-
-    try:
-        lvl2_2 = Pedigree.objects.get(reg_no=lvl1.parent_father)
-        data['lvl2_2'] = lvl2_2
+        if len(results) > 1:
+            return render(request, 'multiple_results.html', {'search_string': search_string,
+                                                        'results': results})
 
 
-    except:
-        data['lvl2_2'] = ''
+        try:
+            lvl1 = Pedigree.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
+        except ObjectDoesNotExist:
+            breeders = Breeder.objects
+            error = "No pedigrees found using: "
+            return render(self.request, 'search.html', {'breeders': breeders,
+                                                   'error': error,
+                                                   'search_string': search_string})
 
-    # lvl 3
-    # 1
-    try:
-        lvl3_1 = Pedigree.objects.get(name=lvl2_1.parent_mother)
-        data['lvl3_1'] = lvl3_1
+        return context
 
-    except:
-        data['lvl3_1'] = ''
-
-    # 2
-    try:
-        lvl3_2 = Pedigree.objects.get(name=lvl2_1.parent_father)
-        data['lvl3_2'] = lvl3_2
-
-    except:
-        data['lvl3_2'] = ''
-
-    # 3
-    try:
-        lvl3_3 = Pedigree.objects.get(name=lvl2_2.parent_mother)
-        data['lvl3_3'] = lvl3_3
-
-    except:
-        data['lvl3_3'] = ''
-
-    # 4
-    try:
-        lvl3_4 = Pedigree.objects.get(name=lvl2_2.parent_father)
-        data['lvl3_4'] = lvl3_4
-
-    except:
-        data['lvl3_4'] = ''
-
-    return render(request, 'results.html', data)
 
 
 @login_required(login_url="/members/login")

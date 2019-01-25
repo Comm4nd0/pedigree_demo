@@ -7,13 +7,9 @@
                                 {{ image.image.url }}
                             {% endif %}
                         {% endfor %}" class="img-responsive thumbnail pb-2">
-                <a href="javascript:document.getElementById('{{ pedigree.id }}').submit()"
+                <a href="{% url 'pedigree' pedigree.id %}"
                    class="btn btn-outline-light waves-effect waves-light" role="button">
                     <span class="btn-label"><i class="{% if pedigree.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ pedigree.reg_no }}</strong></a>
             </span>
         </span>
     </span>
-<form id="{{ pedigree.id }}" method="POST" action="{% url 'results' %}">
-    {% csrf_token %}
-    <input type="hidden" name="search" id="search" value="{{ pedigree.reg_no }}">
-</form>

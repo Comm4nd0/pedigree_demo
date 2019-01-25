@@ -18,7 +18,7 @@ vertical-align: middle;
             <h4 class="card-title">{{ lvl1.name }}</h4>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs customtab" role="tablist">
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#stats" role="tab"><span class="hidden-sm-up"><i class="ti-dashboard"></i></span> <span class="hidden-xs-down">Stats</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#images" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#children" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Children</span></a> </li>
@@ -48,7 +48,7 @@ vertical-align: middle;
                                 <!-- Row -->
                                 <div class="row">
                                     <div class="col-8"><span class="display-6">2376 <i class="ti-angle-down font-14 text-danger"></i></span>
-                                        <h6>Total Visits</h6></div>
+                                        <h6>Eggs Laid</h6></div>
                                     <div class="col-4 align-self-center text-right  pl-0">
                                         <div id="sparklinedash3"></div>
                                     </div>
@@ -62,8 +62,8 @@ vertical-align: middle;
                             <div class="card-body">
                                 <!-- Row -->
                                 <div class="row">
-                                    <div class="col-8"><span class="display-6">3670 <i class="ti-angle-up font-14 text-success"></i></span>
-                                        <h6>Page Views</h6></div>
+                                    <div class="col-8"><span class="display-6">370 <i class="ti-angle-up font-14 text-success"></i></span>
+                                        <h6>Offspring</h6></div>
                                     <div class="col-4 align-self-center text-right pl-0">
                                         <div id="sparklinedash"></div>
                                     </div>
@@ -77,8 +77,8 @@ vertical-align: middle;
                             <div class="card-body">
                                 <!-- Row -->
                                 <div class="row">
-                                    <div class="col-8"><span class="display-6">1562 <i class="ti-angle-up font-14 text-success"></i></span>
-                                        <h6>Unique Visits</h6></div>
+                                    <div class="col-8"><span class="display-7">{{ lvl1.dob }} </span>
+                                        <h6>Date Of Birth</h6></div>
                                     <div class="col-4 align-self-center text-right pl-0">
                                         <div id="sparklinedash2"></div>
                                     </div>
@@ -92,11 +92,14 @@ vertical-align: middle;
                             <div class="card-body">
                                 <!-- Row -->
                                 <div class="row">
-                                    <div class="col-8"><span class="display-6">35% <i class="ti-angle-down font-14 text-danger"></i></span>
-                                        <h6>Bounce Rate</h6></div>
+                                    {% if lvl1.dod %}
+                                    <div class="col-8"><span class="display-7">{{ lvl1.dod }}</span>
+                                        <h6>Date Of Death</h6></div>
                                     <div class="col-4 align-self-center text-right pl-0">
                                         <div id="sparklinedash4"></div>
                                     </div>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -123,26 +126,27 @@ vertical-align: middle;
                     </div>
                 </div>
                 <div class="tab-pane p-3" id="children" role="tabpanel">
-                    {% for child in children.all %}
-                        <div class="card" style="width: 20rem;">
-                          <img class="card-img-top" src="{% for image in child.images.all %}
-                                                            {% if forloop.first %}
-                                                                {{ image.image.url }}
-                                                            {% endif %}
-                                                        {% endfor %}" alt="Card image cap">
-                          <div class="card-body">
-                            <h4 class="card-title">{{ child.name }}</h4>
-                            <p class="card-text">{{ child.description|truncatewords:"50" }}</p>
-                            <a href="javascript:document.getElementById('{{ child.id }}').submit()"
-                               class="btn btn-outline-info waves-effect waves-light" role="button">
-                            <span class="btn-label"><i class="{% if child.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ child.reg_no }}</strong></a>
-                          </div>
-                            <form id="{{ child.id }}" method="POST" action="{% url 'results' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="search" id="search" value="{{ child.reg_no }}">
-                        </form>
-                        </div>
-                    {% endfor %}
+                    {% if children %}
+                        {% for child in children.all %}
+                            <div class="card" style="width: 20rem;">
+                              <img class="card-img-top" src="{% for image in child.images.all %}
+                                                                {% if forloop.first %}
+                                                                    {{ image.image.url }}
+                                                                {% endif %}
+                                                            {% endfor %}" alt="Card image cap">
+                              <div class="card-body">
+                                <h4 class="card-title">{{ child.name }}</h4>
+                                <p class="card-text">{{ child.description|truncatewords:"50" }}</p>
+                                <a href="{% url 'pedigree' child.id %}"
+                                   class="btn btn-outline-info waves-effect waves-light" role="button">
+                                <span class="btn-label"><i class="{% if child.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ child.reg_no }}</strong></a>
+                              </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                    <h4>No children for this pedigree, add one?</h4>
+                    {% include 'add_new_pedigree.html' %}
+                    {% endif %}
                 </div>
             </div>
         </div>
