@@ -37,6 +37,9 @@ class Pedigree(models.Model):
     parent_mother = models.ForeignKey('self', related_name='mother', on_delete=models.CASCADE, blank=True, null=True)
     notes = models.TextField(blank=True)
 
+    # hidden
+    date_added = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.reg_no
 

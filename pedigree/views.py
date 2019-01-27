@@ -10,9 +10,15 @@ import csv
 
 
 def home(request):
-    return render(request, 'dashboard.html')
+    total_pedigrees = Pedigree.objects.all().count()
+    total_breeders = Breeder.objects.all().count()
+    top = Pedigree.objects.all().order_by('-date_added')[:5]
 
-@login_required(login_url="/members/login")
+    return render(request, 'dashboard.html', {'total_pedigrees': total_pedigrees,
+                                              'total_breeders': total_breeders,
+                                              'top': top})
+
+# @login_required(login_url="/members/login")
 def search(request):
     return render(request, 'search.html')
 
@@ -64,7 +70,7 @@ class PedigreeBase(TemplateView):
         return context
 
 
-@method_decorator(login_required, name='dispatch')
+# @method_decorator(login_required, name='dispatch')
 class ShowPedigree(PedigreeBase):
     template_name = 'pedigree.html'
 
@@ -107,7 +113,7 @@ def new_pedigree_form(request):
     return render(request, 'new_pedigree_form.html', {'pedigree_form': PedigreeForm,
                                                       'attributes_form': AttributeForm,})
 
-@login_required(login_url="/members/login")
+# @login_required(login_url="/members/login")
 def breeder(request, breeder):
     breeder_details = Breeder.objects.get(prefix=breeder)
     pedigrees = Pedigree.objects.filter(breeder__prefix__exact=breeder)
@@ -117,13 +123,13 @@ def breeder(request, breeder):
                                             'owned': owned})
 
 
-@login_required(login_url="/members/login")
+# @login_required(login_url="/members/login")
 def breeders(request):
     breeders = Breeder.objects
     return render(request, 'breeders.html', {'breeders': breeders})
 
 
-@login_required(login_url="/members/login")
+# @login_required(login_url="/members/login")
 def goat_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')

@@ -7,11 +7,11 @@ class PedigreeForm(forms.Form):
 
     breeder = forms.ModelChoiceField(queryset=Breeder.objects.all())
     breeder.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    breeder.widget.attrs['data-style'] = 'btn-success'
+    breeder.widget.attrs['data-style'] = 'btn-dark'
 
     current_owner = forms.ModelChoiceField(queryset=Breeder.objects.all())
     current_owner.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    current_owner.widget.attrs['data-style'] = 'btn-success'
+    current_owner.widget.attrs['data-style'] = 'btn-dark'
 
     reg_no = forms.CharField(label='Registration Number', required=True)
     reg_no.widget.attrs['class'] = 'form-control'
