@@ -1,7 +1,7 @@
 from django import forms
 import datetime
 
-from .models import Breeder
+from .models import Breeder, Pedigree
 
 class PedigreeForm(forms.Form):
 
@@ -42,10 +42,10 @@ class PedigreeForm(forms.Form):
     date_of_death.widget.attrs['class'] = 'form-control'
     date_of_death.widget.attrs['placeholder'] = 'dd/mm/yyyy'
 
-    mother = forms.ModelChoiceField(queryset=Breeder.objects.all())
+    mother = forms.ModelChoiceField(queryset=Pedigree.objects.all())
     mother.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
     mother.widget.attrs['data-style'] = 'btn-light'
 
-    father = forms.ModelChoiceField(queryset=Breeder.objects.all())
+    father = forms.ModelChoiceField(queryset=Pedigree.objects.all())
     father.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
     father.widget.attrs['data-style'] = 'btn-light'
