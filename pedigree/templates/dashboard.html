@@ -113,14 +113,15 @@
                             </thead>
                             <tbody>
                                 {% for pedigree in top.all %}
-                                    <tr>
+                                    <tr onclick="window.location='{% url 'pedigree' pedigree.id %}';"
+                                        style="cursor: pointer;">
                                         <td style="width:50px;"><span class="round">{% if pedigree.images %}
                                                                                         <img class="card-img-top"
                                                                                          src="{% for image in pedigree.images.all %}
                                                                                                 {% if forloop.first %}
                                                                                                     {{ image.image.url }}
                                                                                                 {% endif %}
-                                                                                              {% endfor %}" width="50">
+                                                                                              {% endfor %}" height="45" width="50">
                                                                                     {% endif %}
                                         </span>
                                         </td>
