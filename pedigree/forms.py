@@ -7,11 +7,11 @@ class PedigreeForm(forms.Form):
 
     breeder = forms.ModelChoiceField(queryset=Breeder.objects.all())
     breeder.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    breeder.widget.attrs['data-style'] = 'btn-light'
+    breeder.widget.attrs['data-style'] = 'btn-success'
 
     current_owner = forms.ModelChoiceField(queryset=Breeder.objects.all())
     current_owner.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    current_owner.widget.attrs['data-style'] = 'btn-light'
+    current_owner.widget.attrs['data-style'] = 'btn-success'
 
     reg_no = forms.CharField(label='Registration Number', required=True)
     reg_no.widget.attrs['class'] = 'form-control'
@@ -34,8 +34,6 @@ class PedigreeForm(forms.Form):
         ('female', 'Female'),
     ]
     sex = forms.ChoiceField(choices=GENDERS, widget=forms.RadioSelect(attrs={'class': 'radio radio-info'}), initial=1)
-    # sex.widget.attrs['class'] = 'radio radio-info'
-
 
     date_of_death = forms.DateField(initial=datetime.date.today, required=False,
                                            widget=forms.widgets.DateInput(format="%d/%m/%Y", attrs={'type': 'date'}))
@@ -44,8 +42,24 @@ class PedigreeForm(forms.Form):
 
     mother = forms.ModelChoiceField(queryset=Pedigree.objects.all())
     mother.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    mother.widget.attrs['data-style'] = 'btn-light'
+    mother.widget.attrs['data-style'] = 'btn-primary'
 
     father = forms.ModelChoiceField(queryset=Pedigree.objects.all())
     father.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    father.widget.attrs['data-style'] = 'btn-light'
+    father.widget.attrs['data-style'] = 'btn-info'
+
+    description = forms.CharField(widget=forms.Textarea, required=False)
+
+    note = forms.CharField(required=False)
+    note.widget.attrs['class'] = 'form-control'
+
+
+class AttributeForm(forms.Form):
+
+    eggs_per_week = forms.IntegerField()
+    eggs_per_week.widget.attrs['class'] = 'form-control'
+    eggs_per_week.widget.attrs['data-plugin'] = 'vertical-spin'
+    eggs_per_week.widget.attrs['data-bts-button-down-class-plugin'] = 'btn btn-secondary btn-outline'
+    eggs_per_week.widget.attrs['data-bts-button-up-class'] = 'btn btn-secondary btn-outline'
+
+    prize_winning = forms.ChoiceField(widget=forms.CheckboxInput(attrs={'class': 'checkbox checkbox-success'}))

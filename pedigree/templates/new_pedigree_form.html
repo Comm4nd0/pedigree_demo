@@ -72,7 +72,16 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
                                             <div class="col-md-9">
-                                                {{ field }}
+                                                {% if field.label == 'Prize winning' %}
+                                                    {% for option in field %}
+                                                        <div class="checkbox checkbox-success pt-2">
+                                                            <input id="{{ field.label }}" type="checkbox">
+                                                            <label for="{{ field.label }}"></label>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
                                                 {% for error in field.errors %}
                                                   <span class="help-block">{{ error }}</span>
                                                 {% endfor %}
