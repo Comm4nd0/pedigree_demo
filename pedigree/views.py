@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
 from .models import Pedigree, Breeder
-from .forms import PedigreeForm, AttributeForm, ImageForm
+from .forms import PedigreeForm
 from django.db.models import Q
 import csv
 
@@ -104,9 +104,7 @@ def search_results(request):
         return redirect('pedigree', pedigree_id=lvl1.id)
 
 def new_pedigree_form(request):
-    return render(request, 'new_pedigree_form.html', {'pedigree_form': PedigreeForm,
-                                                      'attributes_form': AttributeForm,
-                                                      'image_form': ImageForm})
+    return render(request, 'new_pedigree_form.html', {'pedigree_form': PedigreeForm})
 
 
 @login_required(login_url="/members/login")

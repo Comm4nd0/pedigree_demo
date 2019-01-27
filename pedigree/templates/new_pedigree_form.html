@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block content %}
+
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
@@ -35,9 +36,18 @@
                             {% for field in pedigree_form.visible_fields %}
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
+                                    <label class="col-sm-3 text-right col-form-label">{{ field.label|title }}</label>
                                     <div class="col-md-9">
-                                        {{ field|add_class:'form-control' }}
+                                        {% if field.label == 'Sex' %}
+                                            <div class="radio radio-info pt-2">
+                                                {% for option in field %}
+                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label }}" {% if forloop.first %}checked{% endif %}>
+                                                        <label for="{{ option.id_for_label }}" class="pr-2"> {{ option.choice_label }} </label>
+                                                {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
                                         {% for error in field.errors %}
                                           <span class="help-block">{{ error }}</span>
                                         {% endfor %}
@@ -45,6 +55,7 @@
                                 </div>
                             </div>
                             {% endfor %}
+
                         </div>
                         <h3 class="box-title">Attributes</h3>
                         <hr class="mt-0 mb-5">
