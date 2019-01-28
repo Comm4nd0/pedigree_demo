@@ -12,11 +12,19 @@ import csv
 def home(request):
     total_pedigrees = Pedigree.objects.all().count()
     total_breeders = Breeder.objects.all().count()
-    top = Pedigree.objects.all().order_by('-date_added')[:5]
+    top_pedigrees = Pedigree.objects.all().order_by('-date_added')[:5]
+
+    top_breeders = Breeder.objects.all()
+
+    # breeders_totals = {}
+    # for breeder in top_breeders:
+    #     breeders_totals[breeder]['pedigree_count'] = Pedigree.objects.filter(breeder__prefix__exact=breeder).count()
+    #     breeders_totals[breeder]['owned_count'] = Pedigree.objects.filter(current_owner__prefix__exact=breeder).count()
 
     return render(request, 'dashboard.html', {'total_pedigrees': total_pedigrees,
                                               'total_breeders': total_breeders,
-                                              'top': top})
+                                              'top_pedigrees': top_pedigrees,
+                                              'top_breeders': top_breeders,})
 
 # @login_required(login_url="/members/login")
 def search(request):

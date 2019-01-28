@@ -17,9 +17,16 @@ class Breeder(models.Model):
         return self.prefix
 
 
+class Breed(models.Model):
+    breed_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.breed_name
+
 class Pedigree(models.Model):
     breeder = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True)
-    current_owner = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True, related_name='+')
+    current_owner = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True, related_name='owner')
+    breed = models.ForeignKey(Breed, on_delete=models.CASCADE, blank=True, null=True, related_name='breed')
     reg_no = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
     description = models.TextField(max_length=1000, blank=True)

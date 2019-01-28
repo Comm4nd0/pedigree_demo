@@ -27,7 +27,7 @@
         <!-- Row -->
         <div class="row">
             <!-- Column -->
-            <div class="col-md-6 col-lg-8 col-xlg-8">
+            <div class="col-md-8 col-lg-8 col-xlg-8">
                 <div class="row">
                     <div class="col-md-6 col-lg-3 col-xlg-3">
                         <div class="card card-inverse card-info">
@@ -112,7 +112,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for pedigree in top.all %}
+                                {% for pedigree in top_pedigrees.all %}
                                     <tr onclick="window.location='{% url 'pedigree' pedigree.id %}';"
                                         style="cursor: pointer;">
                                         <td style="width:50px;"><span class="round">{% if pedigree.images %}
@@ -126,10 +126,45 @@
                                         </span>
                                         </td>
                                         <td>
-                                            <h6>{{ pedigree.reg_no }}</h6><small class="text-muted">{{ pedigree.reg_no }}</small></td>
+                                            <h6>{{ pedigree.reg_no }}</h6><small class="text-muted">Breed: {{ pedigree.breed.breed_name }}</small></td>
                                         <td>{{ pedigree.name }}</td>
                                         <td><span class="label {% if pedigree.sex == 'male' %}label-light-info{% else %}label-light-primary{% endif %}"> {{ pedigree.sex }} </span></td>
-                                        <td>{{ pedigree.dob }}</td>
+                                        <td>{{ pedigree.dob|date:'M-Y' }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                <!-- top breeders-->
+                <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block align-items-center">
+                        <h4 class="card-title">Top Breeders/Owners</h4>
+                    </div>
+                    <div class="table-responsive mt-2">
+                        <table class="table stylish-table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Prefix</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>No of Pedigrees</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for breeder in top_breeders.all %}
+                                    <tr onclick="window.location='{% url 'breeder' breeder.id %}';"
+                                        style="cursor: pointer;">
+                                        <td style="width:50px;">
+                                            <span class="round"></span>
+                                        </td>
+                                        <td>
+                                            <h6>{{ breeder.prefix }}</h6><small class="text-muted">{{ breeder.address|truncatewords:"3" }}</small></td>
+                                        <td>{{ breeder.contact_name }}</td>
+                                        <td><span class="label {% if pedigree.sex == 'male' %}label-light-info{% else %}label-light-primary{% endif %}">  </span></td>
+                                        <td></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

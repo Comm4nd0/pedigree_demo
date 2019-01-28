@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pedigree, Breeder, PedigreeImage, PedigreeAttributes
+from .models import Pedigree, Breeder, PedigreeImage, PedigreeAttributes, Breed
 from django.urls import reverse
 
 
@@ -19,7 +19,7 @@ class PedigreeAdmin(admin.ModelAdmin):
     ordering = ['reg_no']
     empty_value_display = '-empty-'
     fields = (('breeder', 'current_owner'),
-              ('reg_no', 'name'),
+              ('reg_no', 'name', 'breed'),
               ('description',),
               ('date_of_registration',),
               ('dob',),
@@ -57,3 +57,5 @@ admin.site.register(Breeder, BreederAdmin)
 admin.site.register(PedigreeImage)
 
 admin.site.register(PedigreeAttributes)
+
+admin.site.register(Breed)
