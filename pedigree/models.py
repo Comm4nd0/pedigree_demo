@@ -26,7 +26,6 @@ class Breed(models.Model):
 class Pedigree(models.Model):
     breeder = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True)
     current_owner = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True, related_name='owner')
-    breed = models.ForeignKey(Breed, on_delete=models.CASCADE, blank=True, null=True, related_name='breed')
     reg_no = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
     description = models.TextField(max_length=1000, blank=True)
@@ -63,6 +62,7 @@ class PedigreeImage(models.Model):
 
 class PedigreeAttributes(models.Model):
     reg_no = models.OneToOneField(Pedigree, on_delete=models.CASCADE, primary_key=True, related_name='attribute')
+    breed = models.ForeignKey(Breed, on_delete=models.CASCADE, blank=True, null=True, related_name='breed')
     eggs_per_week = models.IntegerField(default=0)
     prize_winning = models.BooleanField(default=False)
 

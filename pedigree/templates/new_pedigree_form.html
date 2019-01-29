@@ -80,7 +80,11 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
                                             <div class="col-md-9">
-                                                {% if field.label == 'Prize winning' %}
+                                                {% if field.label == 'Breed' %}
+                                                    <div id="breeds">
+                                                        <input class="typeahead form-control" type="text" placeholder="{{ field.label|title }}">
+                                                    </div>
+                                                {% elif field.label == 'Prize winning' %}
                                                     {% for option in field %}
                                                         <div class="checkbox checkbox-success pt-2">
                                                             <input id="{{ field.label }}" type="checkbox">

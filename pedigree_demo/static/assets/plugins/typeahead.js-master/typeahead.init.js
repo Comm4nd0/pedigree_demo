@@ -25,6 +25,7 @@ var substringMatcher = function(strs) {
 
 var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456'];;
 var breeders = ['Breeder 1'];;
+var breeds = ['Breed type 1'];;
 
 $('#reg_numbers .typeahead').typeahead({
   hint: true,
@@ -44,4 +45,14 @@ $('#breeders .typeahead').typeahead({
 {
   name: 'breeders',
   source: substringMatcher(breeders)
+});
+
+$('#breeds .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'breeds',
+  source: substringMatcher(breeds)
 });

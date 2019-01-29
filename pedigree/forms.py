@@ -1,17 +1,11 @@
 from django import forms
 import datetime
 
-from .models import Breeder, Pedigree
-
 class PedigreeForm(forms.Form):
 
-    breeder = forms.ModelChoiceField(queryset=Breeder.objects.all())
-    breeder.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    breeder.widget.attrs['data-style'] = 'btn-dark'
+    breeder = forms.CharField()
 
-    current_owner = forms.ModelChoiceField(queryset=Breeder.objects.all())
-    current_owner.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    current_owner.widget.attrs['data-style'] = 'btn-dark'
+    current_owner = forms.CharField()
 
     reg_no = forms.CharField(label='Registration Number', required=True)
     reg_no.widget.attrs['class'] = 'form-control'
@@ -40,13 +34,9 @@ class PedigreeForm(forms.Form):
     date_of_death.widget.attrs['class'] = 'form-control'
     date_of_death.widget.attrs['placeholder'] = 'dd/mm/yyyy'
 
-    mother = forms.ModelChoiceField(queryset=Pedigree.objects.all())
-    mother.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    mother.widget.attrs['data-style'] = 'btn-primary'
+    mother = forms.CharField()
 
-    father = forms.ModelChoiceField(queryset=Pedigree.objects.all())
-    father.widget.attrs['class'] = 'selectpicker mb-3 mr-2'
-    father.widget.attrs['data-style'] = 'btn-info'
+    father = forms.CharField()
 
     description = forms.CharField(widget=forms.Textarea, required=False)
     description.widget.attrs['class'] = 'form-control'
@@ -56,6 +46,8 @@ class PedigreeForm(forms.Form):
 
 
 class AttributeForm(forms.Form):
+
+    breed = forms.CharField()
 
     eggs_per_week = forms.IntegerField()
     eggs_per_week.widget.attrs['class'] = 'form-control'
