@@ -38,7 +38,15 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 text-right col-form-label">{{ field.label|title }}</label>
                                     <div class="col-md-9">
-                                        {% if field.label == 'Sex' %}
+                                        {% if field.label == 'Breeder' or field.label == 'Current owner' %}
+                                            <div id="breeders">
+                                                <input class="typeahead form-control" type="text" placeholder="{{ field.label|title }}">
+                                            </div>
+                                        {% elif field.label == 'Mother' or field.label == 'Father' %}
+                                            <div id="reg_numbers">
+                                                <input class="typeahead form-control" type="text" placeholder="{{ field.label|title }}">
+                                            </div>
+                                        {% elif field.label == 'Sex' %}
                                             <div class="radio radio-info pt-2">
                                                 {% for option in field %}
                                                     <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label }}" {% if forloop.first %}checked{% endif %}>

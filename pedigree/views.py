@@ -7,7 +7,8 @@ from .models import Pedigree, Breeder
 from .forms import PedigreeForm, AttributeForm
 from django.db.models import Q
 import csv
-
+from jinja2 import Environment, FileSystemLoader
+import os
 
 def home(request):
     total_pedigrees = Pedigree.objects.all().count()
@@ -118,6 +119,26 @@ def search_results(request):
         return redirect('pedigree', pedigree_id=lvl1.id)
 
 def new_pedigree_form(request):
+    pedigrees_objs = Pedigree.objects.all()
+    breeders_objs = Breeder.objects.all()
+
+    reg_numbers = []
+    for pedigree in pedigrees_objs:
+        reg_numbers.append(str(pedigree.reg_no))
+
+    breeders = []
+    for breeder in breeders_objs:
+        breeders.append(str(breeder.prefix))
+
+    env = Environment(loader=FileSystemLoader('pedigree_demo/static/assets/plugins/typeahead.js-master'))
+    template = env.get_template('typeahead.init.j2')
+
+    with open('pedigree_demo/static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
+        fh.write(template.render(
+            reg_numbers=reg_numbers,
+            breeders=breeders
+        ))
+
     return render(request, 'new_pedigree_form.html', {'pedigree_form': PedigreeForm,
                                                       'attributes_form': AttributeForm,})
 

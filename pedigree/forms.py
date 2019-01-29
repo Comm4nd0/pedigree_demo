@@ -49,6 +49,7 @@ class PedigreeForm(forms.Form):
     father.widget.attrs['data-style'] = 'btn-info'
 
     description = forms.CharField(widget=forms.Textarea, required=False)
+    description.widget.attrs['class'] = 'form-control'
 
     note = forms.CharField(required=False)
     note.widget.attrs['class'] = 'form-control'
