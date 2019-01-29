@@ -24,7 +24,7 @@ var substringMatcher = function(strs) {
 };
 
 var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456'];;
-var breeders = ['Breeder 1'];;
+var breeders = ['Example Breeder 1'];;
 var breeds = ['Breed type 1'];;
 
 $('#reg_numbers .typeahead').typeahead({

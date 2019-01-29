@@ -7,6 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS = [
     'pedigree',
+    'breeder',
     'members',
     'widget_tweaks',
     'django.contrib.admin',

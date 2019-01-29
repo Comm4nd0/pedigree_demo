@@ -38,6 +38,9 @@
     <!--form css-->
     <link href="{% static 'assets/plugins/bootstrap-select/bootstrap-select.min.css' %}" rel="stylesheet" />
 
+    <!-- Dropzone css -->
+    <link href="{% static 'assets/plugins/dropzone-master/dist/dropzone.css' %}" rel="stylesheet" type="text/css" />
+
     <!-- Custom CSS -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -226,10 +229,10 @@
                                 class="hide-menu">Pedigree</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{% url 'pedigree_search' %}">Search</a></li>
-                            <li><a href="{% url 'breeders' %}">Breeders</a></li>
                             <li><a href="{% url 'new_pedigree_form' %}">Add New</a></li>
                         </ul>
                     </li>
+                    <li><a href="{% url 'breeders' %}">Breeders</a></li>
                     <li class="nav-devider"></li>
                     <li class="nav-small-cap">Database Management</li>
                     <li>
@@ -348,6 +351,9 @@
 <!-- Typehead Plugin JavaScript -->
 <script src="{% static 'assets/plugins/typeahead.js-master/dist/typeahead.bundle.min.js' %}"></script>
 <script src="{% static 'assets/plugins/typeahead.js-master/typeahead.init.js' %}"></script>
+
+<!-- Dropzone Plugin JavaScript -->
+<script src="{% static 'assets/plugins/dropzone-master/dist/dropzone.js' %}"></script>
 
 <!-- Chart JS -->
 <script src="{% static 'js/dashboard1.js' %}"></script>

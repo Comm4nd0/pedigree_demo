@@ -1,14 +1,14 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, render_to_response
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
-from .models import Pedigree, Breeder, Breed
-from .forms import PedigreeForm, AttributeForm
+from .models import Pedigree, Breed
+from breeder.models import Breeder
+from .forms import PedigreeForm, AttributeForm, ImagesForm
 from django.db.models import Q
 import csv
 from jinja2 import Environment, FileSystemLoader
-import os
 
 def home(request):
     total_pedigrees = Pedigree.objects.all().count()
@@ -123,6 +123,17 @@ def new_pedigree_form(request):
     breeder_objs = Breeder.objects.all()
     breed_objs = Breed.objects.all()
 
+    pedigree_form = PedigreeForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        # check whether it's valid:
+        if pedigree_form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponse('/thanks/')
+    else:
+        pedigree_form = PedigreeForm()
+
     reg_numbers = []
     for pedigree in pedigree_objs:
         reg_numbers.append(str(pedigree.reg_no))
@@ -146,23 +157,9 @@ def new_pedigree_form(request):
             breeds=breeds
         ))
 
-    return render(request, 'new_pedigree_form.html', {'pedigree_form': PedigreeForm,
-                                                      'attributes_form': AttributeForm,})
-
-# @login_required(login_url="/members/login")
-def breeder(request, breeder):
-    breeder_details = Breeder.objects.get(prefix=breeder)
-    pedigrees = Pedigree.objects.filter(breeder__prefix__exact=breeder)
-    owned = Pedigree.objects.filter(current_owner__prefix__exact=breeder)
-    return render(request, 'breeder.html', {'breeder_details': breeder_details,
-                                            'pedigrees': pedigrees,
-                                            'owned': owned})
-
-
-# @login_required(login_url="/members/login")
-def breeders(request):
-    breeders = Breeder.objects
-    return render(request, 'breeders.html', {'breeders': breeders})
+    return render(request, 'new_pedigree_form.html', {'pedigree_form': pedigree_form,
+                                                      'attributes_form': AttributeForm,
+                                                      'image_form': ImagesForm})
 
 
 # @login_required(login_url="/members/login")
@@ -198,32 +195,5 @@ def goat_csv(request):
                          row.parent_mother,
                          row.notes,
                          row.image,])
-
-    return response
-
-
-def breeder_csv(request):
-    # Create the HttpResponse object with the appropriate CSV header.
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="breeder_db.csv"'
-
-    writer = csv.writer(response)
-    writer.writerow(['prefix',
-                     'contact_name',
-                     'address',
-                     'phone_number1',
-                     'phone_number2',
-                     'email',
-                     'active'])
-    breeder = Breeder.objects
-    for row in breeder.all():
-        writer.writerow([row.prefix,
-                         row.contact_name,
-                         row.address,
-                         row.phone_number1,
-                         row.phone_number2,
-                         row.email,
-                         row.active
-                         ])
 
     return response

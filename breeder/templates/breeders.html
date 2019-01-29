@@ -38,18 +38,14 @@
             <tbody id="bredTable">
             {% for breeder in breeders.all %}
                 {% if breeder.active %}
-                    <tr onclick="javascript:{document.getElementById('{{ breeder.id }}').submit()}"
-                        style="cursor: pointer;">
+                    <tr onclick="window.location='{% url 'breeder' breeder.prefix %}';"
+                                        style="cursor: pointer;">
                         <th scope="row">{{ breeder.contact_name }}</th>
                         <td>{{ breeder.prefix }}</td>
                         <td>{{ breeder.address }}</td>
                         <td>{{ breeder.email }}</td>
                         <td>{{ breeder.phone_number1 }}</td>
                     </tr>
-                    <form id="{{ breeder.id }}" method="POST" action="{% url 'breeder' breeder.prefix %}">
-                        {% csrf_token %}
-                        <input type="hidden">
-                    </form>
                 {% endif %}
             {% endfor %}
             </tbody>

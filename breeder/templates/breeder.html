@@ -31,20 +31,16 @@
             </tr>
             </thead>
             <tbody id="ownerTable">
-            {% for goat in owned.all %}
-                <tr onclick="javascript:{document.getElementById('{{ goat.id }}').submit()}"
-                    style="cursor: pointer;">
-                    <th scope="row">{{ goat.reg_no }}</th>
-                    <td>{{ goat.name }}</td>
-                    <td>{{ goat.dob }}</td>
-                    <td>{{ goat.dod }}</td>
-                    <td>{{ goat.sex }}</td>
-                    <td>{{ goat.notes }}</td>
+            {% for pedigree in owned.all %}
+                <tr onclick="window.location='{% url 'pedigree' pedigree.id %}';"
+                                        style="cursor: pointer;">
+                    <th scope="row">{{ pedigree.reg_no }}</th>
+                    <td>{{ pedigree.name }}</td>
+                    <td>{{ pedigree.dob }}</td>
+                    <td>{{ pedigree.dod }}</td>
+                    <td>{{ pedigree.sex }}</td>
+                    <td>{{ pedigree.notes }}</td>
                 </tr>
-                <form id="{{ goat.id }}" method="POST" action="{% url 'results' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="search" id="search" value="{{ goat.reg_no }}">
-                </form>
             {% endfor %}
             </tbody>
         </table>
@@ -64,8 +60,8 @@
             </thead>
             <tbody id="bredTable">
             {% for pedigree in pedigrees.all %}
-                <tr onclick="javascript:{document.getElementById('{{ pedigree.id }}').submit()}"
-                    style="cursor: pointer;">
+                <tr onclick="window.location='{% url 'pedigree' pedigree.id %}';"
+                                        style="cursor: pointer;">
                     <th scope="row">{{ pedigree.reg_no }}</th>
                     <td>{{ pedigree.name }}</td>
                     <td>{{ pedigree.dob }}</td>
@@ -73,10 +69,6 @@
                     <td>{{ pedigree.sex }}</td>
                     <td>{{ pedigree.notes }}</td>
                 </tr>
-                <form id="{{ pedigree.id }}" method="POST" action="{% url 'results' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="search" id="search" value="{{ pedigree.reg_no }}">
-                </form>
             {% endfor %}
             </tbody>
         </table>

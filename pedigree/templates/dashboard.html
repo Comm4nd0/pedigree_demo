@@ -13,10 +13,6 @@
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </div>
-        <div class="col-md-6 col-4 align-self-center">
-            <button class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
-            </button>
-        </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
@@ -155,7 +151,7 @@
                             </thead>
                             <tbody>
                                 {% for breeder in top_breeders.all %}
-                                    <tr onclick="window.location='{% url 'breeder' breeder.id %}';"
+                                    <tr onclick="window.location='{% url 'breeder' breeder.prefix %}';"
                                         style="cursor: pointer;">
                                         <td style="width:50px;">
                                             <span class="round"></span>

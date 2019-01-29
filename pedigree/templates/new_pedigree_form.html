@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
+
 {% block content %}
 
     <!-- ============================================================== -->
@@ -24,10 +24,25 @@
                 <h4 class="mb-0 ">Add New Pedigree Form</h4>
             </div>
             <div class="card-body">
-                <form action="#" class="form-horizontal">
+                <form action="{% url 'new_pedigree_form' %}" method="POST" class="form-horizontal">
+                    {% csrf_token %}
                     <div class="form-body">
                         <h3 class="box-title">Pedigree Info</h3>
                         <hr class="mt-0 mb-5">
+                        {% if pedigree_form.errors %}
+                            {% for field in pedigree_form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ field.label }}: {{ error }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in pedigree_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="row">
                             {% for hidden in pedigree_form.hidden_fields %}
                                 {{ hidden }}
@@ -49,7 +64,7 @@
                                         {% elif field.label == 'Sex' %}
                                             <div class="radio radio-info pt-2">
                                                 {% for option in field %}
-                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label }}" {% if forloop.first %}checked{% endif %}>
+                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label }}" %}>
                                                         <label for="{{ option.id_for_label }}" class="pr-2"> {{ option.choice_label }} </label>
                                                 {% endfor %}
                                         </div>
@@ -112,21 +127,17 @@
                             {% for hidden in image_form.hidden_fields %}
                                 {{ hidden }}
                             {% endfor %}
-
                             {% for field in image_form.visible_fields %}
-                                {% if field.name != 'reg_no'%}
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
-                                            <div class="col-md-9">
-                                                {{ field }}
-                                                {% for error in field.errors %}
-                                                  <span class="help-block">{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
+                                        <div class="col-md-9">
+                                            {{ field }}
+                                            {% for error in field.errors %}
+                                              <span class="help-block">{{ error }}</span>
+                                            {% endfor %}
                                         </div>
-                                    </div>
-                                {% endif %}
+                                </div>
                             {% endfor %}
                         </div>
                         <!--/row-->
@@ -147,7 +158,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </form>
     </div>
 
     </div>
