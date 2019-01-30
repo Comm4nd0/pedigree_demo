@@ -3,7 +3,7 @@ from django.db import models
 
 class Breeder(models.Model):
 
-    prefix = models.CharField(max_length=100, blank=True)
+    prefix = models.CharField(max_length=100, blank=False)
     contact_name = models.CharField(max_length=100, blank=True)
 
     address = models.CharField(max_length=250, blank=True)

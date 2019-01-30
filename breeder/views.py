@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Breeder
 from pedigree.models import Pedigree
+from .forms import BreederForm
 import csv
 
 # @login_required(login_url="/members/login")
@@ -43,3 +44,26 @@ def breeder_csv(request):
                          ])
 
     return response
+
+def new_breeder_form(request):
+    breeder_form = BreederForm(request.POST or None, request.FILES or None)
+
+    if request.method == 'POST':
+        if breeder_form.is_valid():
+            new_breeder = Breeder()
+            new_breeder.prefix = breeder_form['prefix'].value()
+            new_breeder.contact_name = breeder_form['contact_name'].value()
+            new_breeder.address = breeder_form['address'].value()
+            new_breeder.phone_number1 = breeder_form['phone_number1'].value()
+            new_breeder.phone_number2 = breeder_form['phone_number2'].value()
+            new_breeder.email = breeder_form['email'].value()
+            new_breeder.active = breeder_form['active'].value()
+            new_breeder.save()
+
+            return redirect('breeder', new_breeder.prefix)
+
+
+    else:
+        breeder_form = BreederForm()
+
+    return render(request, 'new_breeder_form.html', {'breeder_form': breeder_form})
