@@ -1,12 +1,6 @@
 from django.db import models
 from breeder.models import Breeder
-
-
-class Breed(models.Model):
-    breed_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.breed_name
+from breed.models import Breed
 
 class Pedigree(models.Model):
     breeder = models.ForeignKey(Breeder, on_delete=models.CASCADE, blank=True, null=True)

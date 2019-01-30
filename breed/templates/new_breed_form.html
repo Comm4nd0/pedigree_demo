@@ -10,7 +10,7 @@
             <h3 class="text-themecolor m-b-0 m-t-0">New Pedigree Form</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                <li class="breadcrumb-item active">New Breeder Form</li>
+                <li class="breadcrumb-item active">New Breed Form</li>
             </ol>
         </div>
     </div>
@@ -21,34 +21,34 @@
     <div class="container pt-5">
         <div class="card ">
             <div class="card-header">
-                <h4 class="mb-0 ">Add New Breeder Form</h4>
+                <h4 class="mb-0 ">Add New Breed Form</h4>
             </div>
             <div class="card-body">
-                <form action="{% url 'new_breeder_form' %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{% url 'new_breed_form' %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-body">
-                        <h3 class="box-title">Breeder Info</h3>
+                        <h3 class="box-title">Breed Info</h3>
                         <hr class="mt-0 mb-5">
-                        {% if breeder_form.errors %}
-                            {% for field in breeder_form %}
+                        {% if breed_form.errors %}
+                            {% for field in breed_form %}
                                 {% for error in field.errors %}
                                     <div class="alert alert-danger">
                                         <strong>{{ field.label }}: {{ error }}</strong>
                                     </div>
                                 {% endfor %}
                             {% endfor %}
-                            {% for error in breeder_form.non_field_errors %}
+                            {% for error in breed_form.non_field_errors %}
                                 <div class="alert alert-danger">
                                     <strong>{{ error|escape }}</strong>
                                 </div>
                             {% endfor %}
                         {% endif %}
                         <div class="row">
-                            {% for hidden in breeder_form.hidden_fields %}
+                            {% for hidden in breed_form.hidden_fields %}
                                 {{ hidden }}
                             {% endfor %}
 
-                            {% for field in breeder_form.visible_fields %}
+                            {% for field in breed_form.visible_fields %}
                             <div class="col-lg-6 col-md-12">
                                 <div class="form-group row">
                                     <label class="col-sm-3 text-right col-form-label">{{ field.label|title }}</label>

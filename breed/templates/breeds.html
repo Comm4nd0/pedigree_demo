@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Pedigree Breeds</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Breeds</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <a href="{% url 'new_breed_form' %}" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
+            </a>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <div class="container pt-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Data Table</h4>
+                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Date Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% for breed in breeds.all %}
+                                    <tr>
+                                        <th>{{ breed.id }}</th>
+                                        <th>{{ breed.breed_name }}</th>
+                                        <th>{{ breed.date_added }}</th>
+                                    </tr>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

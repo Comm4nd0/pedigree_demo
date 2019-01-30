@@ -3,7 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
-from .models import Pedigree, Breed, PedigreeAttributes, PedigreeImage
+from .models import Pedigree, PedigreeAttributes, PedigreeImage
+from breed.models import Breed
 from breeder.models import Breeder
 from .forms import PedigreeForm, AttributeForm, ImagesForm
 from django.db.models import Q
