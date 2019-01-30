@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
-from .models import Pedigree, Breed, PedigreeAttributes
+from .models import Pedigree, Breed, PedigreeAttributes, PedigreeImage
 from breeder.models import Breeder
 from .forms import PedigreeForm, AttributeForm, ImagesForm
 from django.db.models import Q
@@ -156,11 +156,11 @@ def new_pedigree_form(request):
             except:
                 pass
             try:
-                new_pedigree.mother = Pedigree.objects.get(reg_no=pedigree_form['mother'].value())
+                new_pedigree.parent_mother = Pedigree.objects.get(reg_no=pedigree_form['mother'].value())
             except ObjectDoesNotExist:
                 pass
             try:
-                new_pedigree.father = Pedigree.objects.get(reg_no=pedigree_form['father'].value())
+                new_pedigree.parent_father = Pedigree.objects.get(reg_no=pedigree_form['father'].value())
             except ObjectDoesNotExist:
                 pass
             new_pedigree.description = pedigree_form['description'].value()
@@ -182,7 +182,12 @@ def new_pedigree_form(request):
             fs = FileSystemStorage()
             for file in files:
                 filename = fs.save(file.name, file)
-            # uploaded_file_url = fs.url(filename)
+                new_pedigree_image = PedigreeImage()
+                new_pedigree_image.reg_no = Pedigree.objects.get(reg_no=new_pedigree.reg_no)
+                fs.url(filename)
+                new_pedigree_image.image = filename
+                new_pedigree_image.save()
+
             new_pedigree.save()
             return redirect('pedigree', new_pedigree.id)
     else:
