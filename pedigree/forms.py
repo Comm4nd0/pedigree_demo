@@ -47,15 +47,16 @@ class PedigreeForm(forms.Form):
 
 class AttributeForm(forms.Form):
 
-    breed = forms.CharField()
+    breed = forms.CharField(required=False)
 
     eggs_per_week = forms.IntegerField(required=False)
     eggs_per_week.widget.attrs['class'] = 'form-control'
     eggs_per_week.widget.attrs['data-plugin'] = 'vertical-spin'
     eggs_per_week.widget.attrs['data-bts-button-down-class-plugin'] = 'btn btn-secondary btn-outline'
     eggs_per_week.widget.attrs['data-bts-button-up-class'] = 'btn btn-secondary btn-outline'
+    eggs_per_week.widget.attrs['value'] = 0
 
-    prize_winning = forms.ChoiceField(widget=forms.CheckboxInput(attrs={'class': 'checkbox checkbox-success'}))
+    prize_winning = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'checkbox checkbox-success'}), required=False)
 
 
 class ImagesForm(forms.Form):

@@ -23,7 +23,7 @@ var substringMatcher = function(strs) {
   };
 };
 
-var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456'];;
+var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456', '123'];;
 var breeders = ['Example Breeder 1'];;
 var breeds = ['Breed type 1'];;
 

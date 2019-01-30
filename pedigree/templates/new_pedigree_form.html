@@ -24,7 +24,7 @@
                 <h4 class="mb-0 ">Add New Pedigree Form</h4>
             </div>
             <div class="card-body">
-                <form action="{% url 'new_pedigree_form' %}" method="POST" class="form-horizontal">
+                <form action="{% url 'new_pedigree_form' %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-body">
                         <h3 class="box-title">Pedigree Info</h3>
@@ -55,16 +55,16 @@
                                     <div class="col-md-9">
                                         {% if field.label == 'Breeder' or field.label == 'Current owner' %}
                                             <div id="breeders">
-                                                <input class="typeahead form-control" type="text" placeholder="{{ field.label|title }}">
+                                                <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ field.label|title }}">
                                             </div>
                                         {% elif field.label == 'Mother' or field.label == 'Father' %}
                                             <div id="reg_numbers">
-                                                <input class="typeahead form-control" type="text" placeholder="{{ field.label|title }}">
+                                                <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ field.label|title }}">
                                             </div>
                                         {% elif field.label == 'Sex' %}
                                             <div class="radio radio-info pt-2">
                                                 {% for option in field %}
-                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label }}" %}>
+                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label|lower }}">
                                                         <label for="{{ option.id_for_label }}" class="pr-2"> {{ option.choice_label }} </label>
                                                 {% endfor %}
                                         </div>
@@ -83,7 +83,20 @@
                         <h3 class="box-title">Attributes</h3>
                         <hr class="mt-0 mb-5">
                         <!--/row-->
-
+                        {% if attributes_form.errors %}
+                            {% for field in attributes_form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ field.label }}: {{ error }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in attributes_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="row">
                             {% for hidden in attributes_form.hidden_fields %}
                                 {{ hidden }}
@@ -97,12 +110,12 @@
                                             <div class="col-md-9">
                                                 {% if field.label == 'Breed' %}
                                                     <div id="breeds">
-                                                        <input class="typeahead form-control" type="text" placeholder="{{ field.label|title }}">
+                                                        <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ field.label|title }}">
                                                     </div>
                                                 {% elif field.label == 'Prize winning' %}
                                                     {% for option in field %}
                                                         <div class="checkbox checkbox-success pt-2">
-                                                            <input id="{{ field.label }}" type="checkbox">
+                                                            <input id="{{ field.label }}" name='{{ field.name }}' value="1" type="checkbox">
                                                             <label for="{{ field.label }}"></label>
                                                         </div>
                                                     {% endfor %}
@@ -122,7 +135,20 @@
                         <h3 class="box-title">Images</h3>
                         <hr class="mt-0 mb-5">
                         <!--/row-->
-
+                        {% if image_form.errors %}
+                            {% for field in image_form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ field.label }}: {{ error }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in image_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="row">
                             {% for hidden in image_form.hidden_fields %}
                                 {{ hidden }}

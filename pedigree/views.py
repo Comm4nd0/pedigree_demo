@@ -1,14 +1,15 @@
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, render_to_response
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
-from .models import Pedigree, Breed
+from .models import Pedigree, Breed, PedigreeAttributes
 from breeder.models import Breeder
 from .forms import PedigreeForm, AttributeForm, ImagesForm
 from django.db.models import Q
 import csv
 from jinja2 import Environment, FileSystemLoader
+from django.core.files.storage import FileSystemStorage
 
 def home(request):
     total_pedigrees = Pedigree.objects.all().count()
@@ -124,13 +125,66 @@ def new_pedigree_form(request):
     breed_objs = Breed.objects.all()
 
     pedigree_form = PedigreeForm(request.POST or None, request.FILES or None)
+    attributes_form = AttributeForm(request.POST or None, request.FILES or None)
+    image_form = ImagesForm(request.POST or None, request.FILES or None)
+
     if request.method == 'POST':
         # check whether it's valid:
-        if pedigree_form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponse('/thanks/')
+        if pedigree_form.is_valid() and attributes_form.is_valid() and image_form.is_valid():
+            new_pedigree = Pedigree()
+            try:
+                new_pedigree.breeder = Breeder.objects.get(prefix=pedigree_form['breeder'].value())
+            except ObjectDoesNotExist:
+                pass
+            try:
+                new_pedigree.current_owner = Breeder.objects.get(prefix=pedigree_form['current_owner'].value())
+            except ObjectDoesNotExist:
+                pass
+            new_pedigree.reg_no = pedigree_form['reg_no'].value()
+            new_pedigree.name = pedigree_form['name'].value()
+            try:
+                new_pedigree.date_of_registration = pedigree_form['date_of_registration'].value() or None
+            except:
+                pass
+            try:
+                new_pedigree.dob = pedigree_form['date_of_birth'].value() or None
+            except:
+                pass
+            new_pedigree.sex = pedigree_form['sex'].value()
+            try:
+                new_pedigree.dod = pedigree_form['date_of_death'].value() or None
+            except:
+                pass
+            try:
+                new_pedigree.mother = Pedigree.objects.get(reg_no=pedigree_form['mother'].value())
+            except ObjectDoesNotExist:
+                pass
+            try:
+                new_pedigree.father = Pedigree.objects.get(reg_no=pedigree_form['father'].value())
+            except ObjectDoesNotExist:
+                pass
+            new_pedigree.description = pedigree_form['description'].value()
+            new_pedigree.note = pedigree_form['note'].value()
+            new_pedigree.save()
+
+            new_pedigree_attributes = PedigreeAttributes()
+            new_pedigree_attributes.reg_no = Pedigree.objects.get(reg_no=new_pedigree.reg_no)
+            try:
+                new_pedigree_attributes.breed = Breed.objects.get(breed_name=attributes_form['breed'].value())
+            except ObjectDoesNotExist:
+                pass
+
+            eggs = attributes_form['eggs_per_week'].value()
+            new_pedigree_attributes.eggs_per_week = int(eggs)
+            new_pedigree_attributes.save()
+
+            files = request.FILES.getlist('upload_images')
+            fs = FileSystemStorage()
+            for file in files:
+                filename = fs.save(file.name, file)
+            # uploaded_file_url = fs.url(filename)
+            new_pedigree.save()
+            return redirect('pedigree', new_pedigree.id)
     else:
         pedigree_form = PedigreeForm()
 
@@ -158,8 +212,8 @@ def new_pedigree_form(request):
         ))
 
     return render(request, 'new_pedigree_form.html', {'pedigree_form': pedigree_form,
-                                                      'attributes_form': AttributeForm,
-                                                      'image_form': ImagesForm})
+                                                      'attributes_form': attributes_form,
+                                                      'image_form': image_form})
 
 
 # @login_required(login_url="/members/login")

@@ -19,7 +19,7 @@ class PedigreeAdmin(admin.ModelAdmin):
     ordering = ['reg_no']
     empty_value_display = '-empty-'
     fields = (('breeder', 'current_owner'),
-              ('reg_no', 'name', 'breed'),
+              ('reg_no', 'name'),
               ('description',),
               ('date_of_registration',),
               ('dob',),

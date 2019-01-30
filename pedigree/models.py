@@ -14,16 +14,16 @@ class Pedigree(models.Model):
     reg_no = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100, blank=True)
     description = models.TextField(max_length=1000, blank=True)
-    date_of_registration = models.DateField(blank=True)
-    dob = models.DateField(blank=True, null=True)
-    dod = models.DateField(blank=True, null=True)
+    date_of_registration = models.DateField(blank=True, null=True, default='')
+    dob = models.DateField(blank=True, null=True, default='')
+    dod = models.DateField(blank=True, null=True, default='')
 
     GENDERS = (
         ('male', 'Male'),
         ('female', 'Female'),
     )
 
-    sex = models.CharField(max_length=10, choices=GENDERS, default=None)
+    sex = models.CharField(max_length=10, choices=GENDERS, default=None, null=True)
     parent_father = models.ForeignKey('self', related_name='farther', on_delete=models.CASCADE, blank=True, null=True)
     parent_mother = models.ForeignKey('self', related_name='mother', on_delete=models.CASCADE, blank=True, null=True)
     notes = models.TextField(blank=True)
