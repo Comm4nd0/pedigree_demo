@@ -111,13 +111,15 @@
                                 {% for pedigree in top_pedigrees.all %}
                                     <tr onclick="window.location='{% url 'pedigree' pedigree.id %}';"
                                         style="cursor: pointer;">
-                                        <td style="width:50px;"><span class="round">{% if pedigree.images %}
+                                        <td style="width:50px;"><span class="round">{% if pedigree.images.first %}
                                                                                 <img class="card-img-top"
                                                                                  src="{% for image in pedigree.images.all %}
                                                                                         {% if forloop.first %}
                                                                                             {{ image.image.url }}
                                                                                         {% endif %}
                                                                                       {% endfor %}" height="45" width="50">
+                                                                            {% else %}
+                                                                                {{ pedigree.name|slice:"1" }}
                                                                             {% endif %}
                                         </span>
                                         </td>
@@ -154,7 +156,7 @@
                                     <tr onclick="window.location='{% url 'breeder' breeder.prefix %}';"
                                         style="cursor: pointer;">
                                         <td style="width:50px;">
-                                            <span class="round"></span>
+                                            <span class="round">{{ breeder.prefix|slice:"1" }}</span>
                                         </td>
                                         <td>
                                             <h6>{{ breeder.prefix }}</h6><small class="text-muted">{{ breeder.address|truncatewords:"3" }}</small></td>
