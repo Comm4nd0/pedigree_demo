@@ -225,14 +225,15 @@
                                 class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-paw"></i><span
                                 class="hide-menu">Pedigree</span></a>
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{% url 'pedigree_search' %}">Search</a></li>
                             <li><a href="{% url 'new_pedigree_form' %}">Add New</a></li>
                         </ul>
                     </li>
-                    <li><a href="{% url 'breeders' %}">Breeders</a></li>
+                    <li><a href="{% url 'breeders' %}"><i class="mdi mdi-account-multiple"></i><span
+                                class="hide-menu">Breeders</span></a></li>
                     <li class="nav-devider"></li>
                     <li class="nav-small-cap">Database Management</li>
                     <li>
