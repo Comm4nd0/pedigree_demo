@@ -23,46 +23,41 @@
 
     <div class="container pt-5">
         <h2 class="featurette-heading">Breeders</h2>
-
-        <input class="form-control" id="bredInput" type="text" placeholder="Search..">
-        <table class="table table-sm table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Prefix</th>
-                <th scope="col">Address</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-            </tr>
-            </thead>
-            <tbody id="bredTable">
-            {% for breeder in breeders.all %}
-                {% if breeder.active %}
-                    <tr onclick="window.location='{% url 'breeder' breeder.prefix %}';"
-                                        style="cursor: pointer;">
-                        <th scope="row">{{ breeder.contact_name }}</th>
-                        <td>{{ breeder.prefix }}</td>
-                        <td>{{ breeder.address }}</td>
-                        <td>{{ breeder.email }}</td>
-                        <td>{{ breeder.phone_number1 }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
-
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Data Export</h4>
+                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Prefix</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody id="bredTable">
+                        {% for breeder in breeders.all %}
+                            {% if breeder.active %}
+                                <tr onclick="window.location='{% url 'breeder' breeder.prefix %}';"
+                                                    style="cursor: pointer;">
+                                    <th scope="row">{{ breeder.contact_name }}</th>
+                                    <td>{{ breeder.prefix }}</td>
+                                    <td>{{ breeder.address }}</td>
+                                    <td>{{ breeder.email }}</td>
+                                    <td>{{ breeder.phone_number1 }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-            $("#bredInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#bredTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
 
 
 {% endblock %}

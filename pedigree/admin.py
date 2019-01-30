@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Pedigree, PedigreeImage, PedigreeAttributes, Breed
-from django.urls import reverse
+from .models import Pedigree, PedigreeImage, PedigreeAttributes
 
 
 class PedigreeAttributesInline(admin.StackedInline):
@@ -36,5 +35,3 @@ admin.site.register(Pedigree, PedigreeAdmin)
 admin.site.register(PedigreeImage)
 
 admin.site.register(PedigreeAttributes)
-
-admin.site.register(Breed)

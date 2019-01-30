@@ -23,9 +23,9 @@ var substringMatcher = function(strs) {
   };
 };
 
-var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456', '123456'];;
-var breeders = ['Example Breeder 1'];;
-var breeds = ['Breed type 1'];;
+var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456', '123456', '123'];;
+var breeders = ['Example Breeder 1', 'test breeder', 'New Breeder', 'Marcos chickens'];;
+var breeds = ['example breed 1', 'example breed 2', 'test', 'TEST BREED', 'about fucking time'];;
 
 $('#reg_numbers .typeahead').typeahead({
   hint: true,

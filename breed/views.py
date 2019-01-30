@@ -5,7 +5,7 @@ from .forms import BreedForm
 
 # @login_required(login_url="/members/login")
 def breeds(request):
-    breeds = Breed.objects.all()
+    breeds = Breed.objects
     return render(request, 'breeds.html', {'breeds': breeds})
 
 
