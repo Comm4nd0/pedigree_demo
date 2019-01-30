@@ -147,7 +147,7 @@
                                 <tr>
                                     <th colspan="2">Prefix</th>
                                     <th>Name</th>
-                                    <th>Address</th>
+                                    <th>Active</th>
                                     <th>No of Pedigrees</th>
                                 </tr>
                             </thead>
@@ -161,7 +161,7 @@
                                         <td>
                                             <h6>{{ breeder.prefix }}</h6><small class="text-muted">{{ breeder.address|truncatewords:"3" }}</small></td>
                                         <td>{{ breeder.contact_name }}</td>
-                                        <td><span class="label {% if pedigree.sex == 'male' %}label-light-info{% else %}label-light-primary{% endif %}">  </span></td>
+                                        <td><span class="label {% if breeder.active %}label-light-success{% else %}label-light-danger{% endif %}">{% if breeder.active %}Active{% else %}Inactive{% endif %}</span></td>
                                         <td></td>
                                     </tr>
                                 {% endfor %}
