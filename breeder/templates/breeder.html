@@ -2,22 +2,41 @@
 
 {% block content %}
 
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Pedigree Breeders</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'breeders' %}">Breeders</a></li>
+                <li class="breadcrumb-item active">{{ breeder.prefix }}</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <a href="{% url 'edit_breeder_form' breeder.id %}" class="btn float-right hidden-sm-down btn-info ml-1"><i class="mdi mdi-lead-pencil"></i> Edit
+            </a>
+            <a href="{% url 'new_breeder_form' %}" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
+            </a>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+
     <div class="container pt-5">
-        <h2 class="featurette-heading">{{ breeder_details }} details</h2>
+        <h2 class="featurette-heading">{{ breeder.prefix }} details</h2>
 
         <dl class="row">
             <dt class="col-sm-3">Contact name</dt>
-            <dd class="col-sm-9">{{ breeder_details.contact_name }}</dd>
+            <dd class="col-sm-9">{{ breeder.contact_name }}</dd>
             <dt class="col-sm-3">Address</dt>
-            <dd class="col-sm-9">{{ breeder_details.address }}</dd>
+            <dd class="col-sm-9">{{ breeder.address }}</dd>
             <dt class="col-sm-3">Phone 1</dt>
-            <dd class="col-sm-9">{{ breeder_details.phone_number1 }}</dd>
+            <dd class="col-sm-9">{{ breeder.phone_number1 }}</dd>
             <dt class="col-sm-3">Phone 2</dt>
-            <dd class="col-sm-9">{{ breeder_details.phone_number2 }}</dd>
+            <dd class="col-sm-9">{{ breeder.phone_number2 }}</dd>
             <dt class="col-sm-3">email</dt>
-            <dd class="col-sm-9"><a href="mailto:{{ breeder_details.email }}">{{ breeder_details.email }}</a></dd>
+            <dd class="col-sm-9"><a href="mailto:{{ breeder.email }}">{{ breeder.email }}</a></dd>
         </dl>
-        <h4>Goats currently owned by {{ breeder_details }}</h4>
+        <h4>Pedigrees currently owned by {{ breeder.prefix }}</h4>
         <input class="form-control" id="ownerInput" type="text" placeholder="Search..">
         <table class="table table-sm table-hover">
             <thead>
@@ -45,7 +64,7 @@
             </tbody>
         </table>
         <hr>
-        <h4>Goats bred by {{ breeder_details }}</h4>
+        <h4>Pedigrees bred by {{ breeder.prefix }}</h4>
         <input class="form-control" id="bredInput" type="text" placeholder="Search..">
         <table class="table table-sm table-hover">
             <thead>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Breeder
 from pedigree.models import Pedigree
 from .forms import BreederForm
@@ -6,10 +6,10 @@ import csv
 
 # @login_required(login_url="/members/login")
 def breeder(request, breeder):
-    breeder_details = Breeder.objects.get(prefix=breeder)
+    breeder = Breeder.objects.get(prefix=breeder)
     pedigrees = Pedigree.objects.filter(breeder__prefix__exact=breeder)
     owned = Pedigree.objects.filter(current_owner__prefix__exact=breeder)
-    return render(request, 'breeder.html', {'breeder_details': breeder_details,
+    return render(request, 'breeder.html', {'breeder': breeder,
                                             'pedigrees': pedigrees,
                                             'owned': owned})
 
@@ -67,3 +67,21 @@ def new_breeder_form(request):
         breeder_form = BreederForm()
 
     return render(request, 'new_breeder_form.html', {'breeder_form': breeder_form})
+
+
+def edit_breeder_form(request, breeder_id):
+    breeder = get_object_or_404(Breeder, id=breeder_id)
+    breeder_form = BreederForm(request.POST or None, request.FILES or None, instance=breeder)
+
+    if request.method == 'POST':
+        if breeder_form.is_valid():
+            breeder_form.save()
+
+            return redirect('breeder', breeder.prefix)
+
+
+    else:
+        breeder_form = BreederForm()
+
+    return render(request, 'edit_breeder_form.html', {'breeder_form': breeder_form,
+                                                      'breeder': breeder})
