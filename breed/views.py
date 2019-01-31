@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Breed
 from .forms import BreedForm
 
@@ -26,3 +26,20 @@ def new_breed_form(request):
 
     return render(request, 'new_breed_form.html', {'breed_form': breed_form})
 
+
+def edit_breed_form(request, breed_id):
+    breed = get_object_or_404(Breed, id=breed_id)
+    breed_form = BreedForm(request.POST or None, request.FILES or None, instance=breed)
+
+    if request.method == 'POST':
+        if breed_form.is_valid():
+            breed_form.save()
+
+            return redirect('breeds')
+
+
+    else:
+        breed_form = BreedForm()
+
+    return render(request, 'edit_breed_form.html', {'breed_form': breed_form,
+                                                    'breed': breed})

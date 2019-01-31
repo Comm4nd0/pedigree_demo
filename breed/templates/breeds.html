@@ -35,14 +35,17 @@
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Date Added</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
                                 {% for breed in breeds.all %}
                                     <tr>
-                                        <th scope="row">{{ breed.id }}</th>
-                                        <th>{{ breed.breed_name }}</th>
-                                        <th>{{ breed.date_added }}</th>
+                                        <td scope="row">{{ breed.id }}</td>
+                                        <td>{{ breed.breed_name }}</td>
+                                        <td>{{ breed.date_added }}</td>
+                                        <td><a href="{% url 'edit_breed_form' breed.id %}" class="btn btn-outline-success"><i class="mdi mdi-lead-pencil"></i> Edit
+                                            </a></td>
                                     </tr>
                                 {% endfor %}
                         </tbody>
