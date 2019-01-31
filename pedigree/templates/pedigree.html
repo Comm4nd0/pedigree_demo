@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% block content %}
 <style>
 td:nth-child(1) {
@@ -12,16 +13,38 @@ vertical-align: middle;
     z-index: 10 !important;
 }
 </style>
+
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Pedigree Breeders</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedigree_search' %}">Pedigree search</a></li>
+                <li class="breadcrumb-item active">{{ lvl1.reg_no }}</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <a href="{% url 'edit_pedigree_form' lvl1.id %}" class="btn float-right hidden-sm-down btn-info ml-1"><i class="mdi mdi-lead-pencil"></i> Edit
+            </a>
+            <a href="{% url 'new_pedigree_form' %}" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
+            </a>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+
 <div class="">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">{{ lvl1.name }}</h4>
+
             <!-- Nav tabs -->
             <ul class="nav nav-tabs customtab" role="tablist">
                 <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#stats" role="tab"><span class="hidden-sm-up"><i class="ti-dashboard"></i></span> <span class="hidden-xs-down">Stats</span></a> </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#images" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#children" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Children</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#children" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-human-child"></i></span> <span class="hidden-xs-down">Children</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#edit" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-lead-pencil"></i></span> <span class="hidden-xs-down">Edit</span></a> </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -147,6 +170,10 @@ vertical-align: middle;
                     <h4>No children for this pedigree, add one?</h4>
                     {% include 'add_new_pedigree.html' %}
                     {% endif %}
+                </div>
+
+                <div class="tab-pane p-3" id="edit" role="tabpanel">
+
                 </div>
             </div>
         </div>

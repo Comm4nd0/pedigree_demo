@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, render_to_response
+from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, render_to_response, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from .models import Pedigree, PedigreeAttributes, PedigreeImage
 from breed.models import Breed
 from breeder.models import Breeder
-from .forms import PedigreeForm, AttributeForm, ImagesForm
+from .forms import PedigreeForm, AttributeForm, ImagesForm, PedigreeEditForm, AttributesEditForm, ImagesEditForm
 from django.db.models import Q
 import csv
 from jinja2 import Environment, FileSystemLoader
@@ -220,6 +220,28 @@ def new_pedigree_form(request):
     return render(request, 'new_pedigree_form.html', {'pedigree_form': pedigree_form,
                                                       'attributes_form': attributes_form,
                                                       'image_form': image_form})
+
+
+def edit_pedigree_form(request, lvl1_id):
+    pedigree = get_object_or_404(Pedigree, id=lvl1_id)
+    pedigree_form = PedigreeEditForm(request.POST or None, request.FILES or None, instance=pedigree)
+    attribute_form = AttributesEditForm(request.POST or None, request.FILES or None, instance=pedigree)
+    image_form = ImagesEditForm(request.POST or None, request.FILES or None, instance=pedigree)
+
+    if request.method == 'POST':
+        if pedigree_form.is_valid() and attribute_form.is_valid() and image_form.is_valid():
+            pedigree_form.save()
+            attribute_form.save()
+            image_form.save()
+
+            return redirect('pedigree', pedigree.id)
+
+
+    else:
+        pedigree_form = PedigreeEditForm()
+
+    return render(request, 'edit_pedigree_form.html', {'pedigree_form': pedigree_form,
+                                                      'pedigree': pedigree})
 
 
 # @login_required(login_url="/members/login")

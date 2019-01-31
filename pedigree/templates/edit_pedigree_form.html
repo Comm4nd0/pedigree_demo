@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Edit Pedigree Form</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedigree_search' %}">Pedigree Search</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedigree' pedigree.id %}">{{ pedigree.reg_no }}</a></li>
+                <li class="breadcrumb-item active">Edit Pedigree</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <div class="container pt-5">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="mb-0 ">Edit Pedigree: {{ pedigree.reg_no }}</h4>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'edit_pedigree_form' pedigree.id%}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-body">
+                        <h3 class="box-title">Pedigree Info</h3>
+                        <hr class="mt-0 mb-5">
+                        {% if pedigree_form.errors %}
+                            {% for field in pedigree_form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ field.label }}: {{ error }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in pedigree_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            {% for hidden in pedigree_form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+
+                            {% for field in pedigree_form.visible_fields %}
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
+                                    <div class="col-md-9">
+                                        {% if field.label == 'Breeder' %}
+                                            <div id="breeders">
+                                                <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ pedigree.breeder }}" value="{{ pedigree.breeder }}">
+                                            </div>
+                                        {% elif field.label == 'Current owner'%}
+                                            <div id="breeders">
+                                                <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ pedigree.current_owner }}" value="{{ pedigree.current_owner }}">
+                                            </div>
+                                        {% elif field.label == 'Mother' %}
+                                            <div id="reg_numbers">
+                                                <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ pedigree.parent_mother }}" value="{{ pedigree.parent_mother }}">
+                                            </div>
+                                        {% elif field.label == 'Father' %}
+                                            <div id="reg_numbers">
+                                                <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ pedigree.parent_father }}" value="{{ pedigree.parent_father }}">
+                                            </div>
+                                        {% elif field.label == 'Reg no' %}
+                                            {% render_field field class="form-control" value=pedigree.reg_no %}
+                                        {% elif field.label == 'Name' %}
+                                            {% render_field field class="form-control" value=pedigree.name %}
+                                        {% elif field.label == 'Date of registration' %}
+                                            {% render_field field class="form-control" value=pedigree.date_of_registration type="date" %}
+                                        {% elif field.label == 'Dob' %}
+                                            {% render_field field class="form-control" value=pedigree.dob type="date" %}
+                                        {% elif field.label == 'Dod' %}
+                                            {% render_field field class="form-control" value=pedigree.dod type="date" %}
+                                        {% elif field.label == 'Sex' %}
+                                            <div class="radio radio-info pt-2">
+                                                {% for option in field %}
+                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label|lower }}" {% if pedigree.sex %}checked{% endif %}>
+                                                        <label for="{{ option.id_for_label }}" class="pr-2"> {{ option.choice_label }} </label>
+                                                {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {% render_field field class="form-control" %}
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                          <span class="help-block">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    <hr>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="button" class="btn btn-inverse">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+
+    </div>
+
+
+
+{% endblock %}

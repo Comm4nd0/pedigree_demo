@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Pedigree, PedigreeAttributes, PedigreeImage
 import datetime
 
 class PedigreeForm(forms.Form):
@@ -64,3 +66,21 @@ class ImagesForm(forms.Form):
     upload_images = forms.ImageField(required=False)
     upload_images.widget.attrs['class'] = 'form-control'
     upload_images.widget.attrs['multiple'] = ''
+
+
+class PedigreeEditForm(ModelForm):
+    class Meta:
+        model = Pedigree
+        fields = '__all__'
+
+
+class AttributesEditForm(ModelForm):
+    class Meta:
+        model = PedigreeAttributes
+        fields = '__all__'
+
+
+class ImagesEditForm(ModelForm):
+    class Meta:
+        model = PedigreeImage
+        fields = '__all__'
