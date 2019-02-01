@@ -208,10 +208,10 @@ def new_pedigree_form(request):
         breeds.append(str(breed.breed_name))
 
 
-    env = Environment(loader=FileSystemLoader('static/assets/plugins/typeahead.js-master'))
+    env = Environment(loader=FileSystemLoader('pedigree_demo/static/assets/plugins/typeahead.js-master'))
     template = env.get_template('typeahead.init.j2')
 
-    with open('static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
+    with open('pedigree_demo/static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
         fh.write(template.render(
             reg_numbers=reg_numbers,
             breeders=breeders,
@@ -223,12 +223,8 @@ def new_pedigree_form(request):
                                                       'image_form': image_form})
 
 
-def edit_pedigree_form(request, lvl1_id):
-    pedigree = get_object_or_404(Pedigree, id=lvl1_id)
-
-    pedigree_objs = Pedigree.objects.all()
-    breeder_objs = Breeder.objects.all()
-    breed_objs = Breed.objects.all()
+def edit_pedigree_form(request, id):
+    pedigree = Pedigree.objects.get(id__exact=int(id))
 
     pedigree_form = PedigreeForm(request.POST or None, request.FILES or None)
     attributes_form = AttributeForm(request.POST or None, request.FILES or None)
@@ -299,9 +295,13 @@ def edit_pedigree_form(request, lvl1_id):
     else:
         pedigree_form = PedigreeForm()
 
+    pedigree_objs = Pedigree.objects.all()
+    breeder_objs = Breeder.objects.all()
+    breed_objs = Breed.objects.all()
+
     reg_numbers = []
-    for pedigree in pedigree_objs:
-        reg_numbers.append(str(pedigree.reg_no))
+    for ped in pedigree_objs:
+        reg_numbers.append(str(ped.reg_no))
 
     breeders = []
     for breeder in breeder_objs:
@@ -311,10 +311,10 @@ def edit_pedigree_form(request, lvl1_id):
     for breed in breed_objs:
         breeds.append(str(breed.breed_name))
 
-    env = Environment(loader=FileSystemLoader('static/assets/plugins/typeahead.js-master'))
+    env = Environment(loader=FileSystemLoader('pedigree_demo/static/assets/plugins/typeahead.js-master'))
     template = env.get_template('typeahead.init.j2')
 
-    with open('static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
+    with open('pedigree_demo/static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
         fh.write(template.render(
             reg_numbers=reg_numbers,
             breeders=breeders,
