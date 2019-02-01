@@ -208,10 +208,10 @@ def new_pedigree_form(request):
         breeds.append(str(breed.breed_name))
 
 
-    env = Environment(loader=FileSystemLoader('pedigree_demo/static/assets/plugins/typeahead.js-master'))
+    env = Environment(loader=FileSystemLoader('static/assets/plugins/typeahead.js-master'))
     template = env.get_template('typeahead.init.j2')
 
-    with open('pedigree_demo/static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
+    with open('static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
         fh.write(template.render(
             reg_numbers=reg_numbers,
             breeders=breeders,
@@ -311,10 +311,10 @@ def edit_pedigree_form(request, lvl1_id):
     for breed in breed_objs:
         breeds.append(str(breed.breed_name))
 
-    env = Environment(loader=FileSystemLoader('pedigree_demo/static/assets/plugins/typeahead.js-master'))
+    env = Environment(loader=FileSystemLoader('static/assets/plugins/typeahead.js-master'))
     template = env.get_template('typeahead.init.j2')
 
-    with open('pedigree_demo/static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
+    with open('static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
         fh.write(template.render(
             reg_numbers=reg_numbers,
             breeders=breeders,
