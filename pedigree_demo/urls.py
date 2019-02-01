@@ -10,5 +10,5 @@ urlpatterns = [
     path('pedigree/', include('pedigree.urls')),
     path('breeders/', include('breeder.urls')),
     path('breeds/', include('breed.urls')),
-    path('members/', include('members.urls')),
+    path('account/', include('account.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

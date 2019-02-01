@@ -168,19 +168,19 @@
                                         <div class="u-img"><img src="{% static 'assets/images/users/u1.gif' %}"
                                                                 alt="user"></div>
                                         <div class="u-text">
-                                            <h4>User</h4>
-                                            <p class="text-muted">user@pedigree-site.com</p><a href="#"
+                                            <h4>{{ request.user.username }}</h4>
+                                            <p class="text-muted">{{ request.user.email }}</p><a href="#"
                                                                                                class="btn btn-rounded btn-danger btn-sm">View
                                             Profile</a></div>
                                     </div>
                                 </li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                <li role="separator" class="divider"></li>
+                                <!--<li><a href="#"><i class="ti-user"></i> My Profile</a></li>-->
+                                <!--<li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>-->
+                                <!--<li role="separator" class="divider"></li>-->
                                 <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logout</a></li>
                             </ul>
                         </div>
                     </li>
@@ -203,15 +203,14 @@
                 <div class="profile-img"><img src="{% static 'assets/images/users/u1.gif' %}" alt="user"/></div>
                 <!-- User profile text-->
                 <div class="profile-text"><a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown"
-                                             role="button" aria-haspopup="true" aria-expanded="true">User <span
-                        class="caret"></span></a>
+                                             role="button" aria-haspopup="true" aria-expanded="true">{{ request.user.username }}</a>
                     <div class="dropdown-menu animated flipInY">
                         <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                        <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                        <!--<a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>-->
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -225,12 +224,8 @@
                                 class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-paw"></i><span
+                        <a href="{% url 'pedigree_search' %}"><i class="mdi mdi-paw"></i><span
                                 class="hide-menu">Pedigree</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="{% url 'pedigree_search' %}">Search</a></li>
-                            <li><a href="{% url 'new_pedigree_form' %}">Add New</a></li>
-                        </ul>
                     </li>
                     <li><a href="{% url 'breeders' %}"><i class="mdi mdi-account-multiple"></i><span
                                 class="hide-menu">Breeders</span></a></li>
@@ -262,11 +257,11 @@
         <!-- Bottom points-->
         <div class="sidebar-footer">
             <!-- item-->
-            <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+            <a href="/admin" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
             <!-- item-->
-            <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+            <a href="" class="link" data-toggle="tooltip" title="Support"><i class="mdi mdi-help-circle-outline"></i></a>
             <!-- item-->
-            <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+            <a href="{% url 'logout' %}" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
         </div>
         <!-- End Bottom points-->
     </aside>
@@ -297,7 +292,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © 2018 CMDLB
+            © 2019 MA Systems Ltd
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

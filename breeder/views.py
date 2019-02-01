@@ -1,10 +1,12 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Breeder
+from django.contrib.auth.decorators import login_required
 from pedigree.models import Pedigree
 from .forms import BreederForm
 import csv
 
-# @login_required(login_url="/members/login")
+
+@login_required(login_url="/account/login")
 def breeder(request, breeder):
     breeder = Breeder.objects.get(prefix=breeder)
     pedigrees = Pedigree.objects.filter(breeder__prefix__exact=breeder)
@@ -14,11 +16,13 @@ def breeder(request, breeder):
                                             'owned': owned})
 
 
-# @login_required(login_url="/members/login")
+@login_required(login_url="/account/login")
 def breeders(request):
     breeders = Breeder.objects
     return render(request, 'breeders.html', {'breeders': breeders})
 
+
+@login_required(login_url="/account/login")
 def breeder_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
@@ -45,6 +49,8 @@ def breeder_csv(request):
 
     return response
 
+
+@login_required(login_url="/account/login")
 def new_breeder_form(request):
     breeder_form = BreederForm(request.POST or None, request.FILES or None)
 
@@ -69,6 +75,7 @@ def new_breeder_form(request):
     return render(request, 'new_breeder_form.html', {'breeder_form': breeder_form})
 
 
+@login_required(login_url="/account/login")
 def edit_breeder_form(request, breeder_id):
     breeder = get_object_or_404(Breeder, id=breeder_id)
     breeder_form = BreederForm(request.POST or None, request.FILES or None, instance=breeder)

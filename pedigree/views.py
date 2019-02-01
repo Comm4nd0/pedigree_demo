@@ -1,17 +1,19 @@
-from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, render_to_response, get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.shortcuts import render, HttpResponse, redirect
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
-from django.utils.decorators import method_decorator
 from .models import Pedigree, PedigreeAttributes, PedigreeImage
 from breed.models import Breed
 from breeder.models import Breeder
-from .forms import PedigreeForm, AttributeForm, ImagesForm, PedigreeEditForm, AttributesEditForm, ImagesEditForm
+from .forms import PedigreeForm, AttributeForm, ImagesForm
 from django.db.models import Q
 import csv
 from jinja2 import Environment, FileSystemLoader
 from django.core.files.storage import FileSystemStorage
 
+
+@login_required(login_url="/account/login")
 def home(request):
     total_pedigrees = Pedigree.objects.all().count()
     total_breeders = Breeder.objects.all().count()
@@ -29,12 +31,16 @@ def home(request):
                                               'top_pedigrees': top_pedigrees,
                                               'top_breeders': top_breeders,})
 
-# @login_required(login_url="/members/login")
+
+@login_required(login_url="/account/login")
 def search(request):
-    return render(request, 'search.html')
+    pedigrees = Pedigree.objects.all()
+    return render(request, 'search.html', {'pedigrees': pedigrees})
 
 
-class PedigreeBase(TemplateView):
+
+class PedigreeBase(LoginRequiredMixin, TemplateView):
+    login_url = '/account/login'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -81,7 +87,7 @@ class PedigreeBase(TemplateView):
         return context
 
 
-# @method_decorator(login_required, name='dispatch')
+
 class ShowPedigree(PedigreeBase):
     template_name = 'pedigree.html'
 
@@ -90,6 +96,7 @@ class ShowPedigree(PedigreeBase):
         return context
 
 
+@login_required(login_url="/account/login")
 def search_results(request):
     if request.POST:
         search_string = request.POST['search']
@@ -120,6 +127,8 @@ def search_results(request):
 
         return redirect('pedigree', pedigree_id=lvl1.id)
 
+
+@login_required(login_url="/account/login")
 def new_pedigree_form(request):
     pedigree_objs = Pedigree.objects.all()
     breeder_objs = Breeder.objects.all()
@@ -223,6 +232,7 @@ def new_pedigree_form(request):
                                                       'image_form': image_form})
 
 
+@login_required(login_url="/account/login")
 def edit_pedigree_form(request, id):
     pedigree = Pedigree.objects.get(id__exact=int(id))
 
@@ -326,7 +336,8 @@ def edit_pedigree_form(request, id):
                                                       'image_form': image_form,
                                                       'pedigree': pedigree})
 
-# @login_required(login_url="/members/login")
+
+@login_required(login_url="/account/login")
 def goat_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')

@@ -9,7 +9,7 @@ INSTALLED_APPS = [
     'pedigree',
     'breeder',
     'breed',
-    'members',
+    'account',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',

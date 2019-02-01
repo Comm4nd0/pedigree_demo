@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Breed
 from .forms import BreedForm
 
 
-# @login_required(login_url="/members/login")
+@login_required(login_url="/account/login")
 def breeds(request):
     breeds = Breed.objects
     return render(request, 'breeds.html', {'breeds': breeds})
 
 
+@login_required(login_url="/account/login")
 def new_breed_form(request):
     breed_form = BreedForm(request.POST or None, request.FILES or None)
 
@@ -27,6 +29,7 @@ def new_breed_form(request):
     return render(request, 'new_breed_form.html', {'breed_form': breed_form})
 
 
+@login_required(login_url="/account/login")
 def edit_breed_form(request, breed_id):
     breed = get_object_or_404(Breed, id=breed_id)
     breed_form = BreedForm(request.POST or None, request.FILES or None, instance=breed)
