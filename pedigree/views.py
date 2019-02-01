@@ -177,6 +177,7 @@ def new_pedigree_form(request):
 
             eggs = attributes_form['eggs_per_week'].value()
             new_pedigree_attributes.eggs_per_week = int(eggs)
+            new_pedigree_attributes.prize_winning = attributes_form['prize_winning'].value()
             new_pedigree_attributes.save()
 
             files = request.FILES.getlist('upload_images')
@@ -224,25 +225,106 @@ def new_pedigree_form(request):
 
 def edit_pedigree_form(request, lvl1_id):
     pedigree = get_object_or_404(Pedigree, id=lvl1_id)
-    pedigree_form = PedigreeEditForm(request.POST or None, request.FILES or None, instance=pedigree)
-    attribute_form = AttributesEditForm(request.POST or None, request.FILES or None, instance=pedigree)
-    image_form = ImagesEditForm(request.POST or None, request.FILES or None, instance=pedigree)
+
+    pedigree_objs = Pedigree.objects.all()
+    breeder_objs = Breeder.objects.all()
+    breed_objs = Breed.objects.all()
+
+    pedigree_form = PedigreeForm(request.POST or None, request.FILES or None)
+    attributes_form = AttributeForm(request.POST or None, request.FILES or None)
+    image_form = ImagesForm(request.POST or None, request.FILES or None)
 
     if request.method == 'POST':
-        if pedigree_form.is_valid() and attribute_form.is_valid() and image_form.is_valid():
-            pedigree_form.save()
-            attribute_form.save()
-            image_form.save()
+        # check whether it's valid:
+        if pedigree_form.is_valid() and attributes_form.is_valid() and image_form.is_valid():
+            try:
+                pedigree.breeder = Breeder.objects.get(prefix=pedigree_form['breeder'].value())
+            except ObjectDoesNotExist:
+                pass
+            try:
+                pedigree.current_owner = Breeder.objects.get(prefix=pedigree_form['current_owner'].value())
+            except ObjectDoesNotExist:
+                pass
+            pedigree.reg_no = pedigree_form['reg_no'].value()
+            pedigree.name = pedigree_form['name'].value()
+            try:
+                pedigree.date_of_registration = pedigree_form['date_of_registration'].value() or None
+            except:
+                pass
+            try:
+                pedigree.dob = pedigree_form['date_of_birth'].value() or None
+            except:
+                pass
+            pedigree.sex = pedigree_form['sex'].value()
+            try:
+                pedigree.dod = pedigree_form['date_of_death'].value() or None
+            except:
+                pass
+            try:
+                pedigree.parent_mother = Pedigree.objects.get(reg_no=pedigree_form['mother'].value())
+            except ObjectDoesNotExist:
+                pass
+            try:
+                pedigree.parent_father = Pedigree.objects.get(reg_no=pedigree_form['father'].value())
+            except ObjectDoesNotExist:
+                pass
+            pedigree.description = pedigree_form['description'].value()
+            pedigree.note = pedigree_form['note'].value()
+            pedigree.save()
 
+            pedigree_attributes = PedigreeAttributes.objects.get(reg_no=pedigree)
+            try:
+                pedigree_attributes.breed = Breed.objects.get(breed_name=attributes_form['breed'].value())
+            except ObjectDoesNotExist:
+                pass
+
+            eggs = attributes_form['eggs_per_week'].value()
+            pedigree_attributes.eggs_per_week = int(eggs)
+            pedigree_attributes.prize_winning = attributes_form['prize_winning'].value()
+
+
+            files = request.FILES.getlist('upload_images')
+            fs = FileSystemStorage()
+            for file in files:
+                filename = fs.save(file.name, file)
+                new_pedigree_image = PedigreeImage()
+                new_pedigree_image.reg_no = Pedigree.objects.get(reg_no=pedigree.reg_no)
+                fs.url(filename)
+                new_pedigree_image.image = filename
+                new_pedigree_image.save()
+
+            pedigree.save()
+            pedigree_attributes.save()
             return redirect('pedigree', pedigree.id)
-
-
     else:
-        pedigree_form = PedigreeEditForm()
+        pedigree_form = PedigreeForm()
+
+    reg_numbers = []
+    for pedigree in pedigree_objs:
+        reg_numbers.append(str(pedigree.reg_no))
+
+    breeders = []
+    for breeder in breeder_objs:
+        breeders.append(str(breeder.prefix))
+
+    breeds = []
+    for breed in breed_objs:
+        breeds.append(str(breed.breed_name))
+
+    env = Environment(loader=FileSystemLoader('pedigree_demo/static/assets/plugins/typeahead.js-master'))
+    template = env.get_template('typeahead.init.j2')
+
+    with open('pedigree_demo/static/assets/plugins/typeahead.js-master/typeahead.init.js', 'w') as fh:
+        fh.write(template.render(
+            reg_numbers=reg_numbers,
+            breeders=breeders,
+            breeds=breeds
+        ))
 
     return render(request, 'edit_pedigree_form.html', {'pedigree_form': pedigree_form,
+                                                      'attributes_form': attributes_form,
+                                                      'image_form': image_form,
                                                       'pedigree': pedigree})
-
 
 # @login_required(login_url="/members/login")
 def goat_csv(request):

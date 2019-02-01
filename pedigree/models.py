@@ -20,7 +20,7 @@ class Pedigree(models.Model):
     sex = models.CharField(max_length=10, choices=GENDERS, default=None, null=True)
     parent_father = models.ForeignKey('self', related_name='farther', on_delete=models.CASCADE, blank=True, null=True)
     parent_mother = models.ForeignKey('self', related_name='mother', on_delete=models.CASCADE, blank=True, null=True)
-    notes = models.TextField(blank=True)
+    note = models.CharField(max_length=255, blank=True)
 
     # hidden
     date_added = models.DateTimeField(auto_now_add=True)

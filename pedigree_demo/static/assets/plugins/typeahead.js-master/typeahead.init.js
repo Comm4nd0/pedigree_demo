@@ -24,7 +24,7 @@ var substringMatcher = function(strs) {
 };
 
 var reg_numbers = ['ABC123456', 'DEF123465', 'GHI132456', '123456', '123'];;
-var breeders = ['Example Breeder 1', 'test breeder', 'New Breeder', 'Marcos chickens'];;
+var breeders = ['Example Breeder 1', 'test breeder', 'New Breeder', 'Marcos chickens', 'breeder'];;
 var breeds = ['test this', 'example breed 5', 'test', 'TEST BREED', 'about fucking time', 'changed'];;
 
 $('#reg_numbers .typeahead').typeahead({

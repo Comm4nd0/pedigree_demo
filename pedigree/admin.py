@@ -11,7 +11,7 @@ class PedigreeImagesInline(admin.TabularInline):
 
 
 class PedigreeAdmin(admin.ModelAdmin):
-    list_display = ('reg_no', 'name', 'breeder', 'notes')
+    list_display = ('reg_no', 'name', 'breeder', 'note')
     list_display_links = ('name', 'breeder', 'reg_no')
     list_filter = ('date_of_registration', 'breeder', 'current_owner', 'date_added')
     search_fields = ['name', 'reg_no']
@@ -25,7 +25,7 @@ class PedigreeAdmin(admin.ModelAdmin):
               ('dod',),
               'sex',
               ('parent_father', 'parent_mother'),
-              'notes',)
+              'note',)
     save_on_top = True
     inlines = [ PedigreeAttributesInline, PedigreeImagesInline ]
 

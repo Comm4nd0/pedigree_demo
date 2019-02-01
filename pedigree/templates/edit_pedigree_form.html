@@ -26,7 +26,7 @@
                 <h4 class="mb-0 ">Edit Pedigree: {{ pedigree.reg_no }}</h4>
             </div>
             <div class="card-body">
-                <form action="{% url 'edit_pedigree_form' pedigree.id%}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{% url 'edit_pedigree_form' pedigree.id %}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-body">
                         <h3 class="box-title">Pedigree Info</h3>
@@ -71,23 +71,27 @@
                                             <div id="reg_numbers">
                                                 <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ pedigree.parent_father }}" value="{{ pedigree.parent_father }}">
                                             </div>
-                                        {% elif field.label == 'Reg no' %}
+                                        {% elif field.label == 'Registration Number' %}
                                             {% render_field field class="form-control" value=pedigree.reg_no %}
                                         {% elif field.label == 'Name' %}
                                             {% render_field field class="form-control" value=pedigree.name %}
                                         {% elif field.label == 'Date of registration' %}
-                                            {% render_field field class="form-control" value=pedigree.date_of_registration type="date" %}
-                                        {% elif field.label == 'Dob' %}
-                                            {% render_field field class="form-control" value=pedigree.dob type="date" %}
+                                             {% render_field field class="form-control" type="date" %}
+                                        {% elif field.label == 'Date of birth' %}
+                                            {% render_field field class="form-control" type="date" %}
                                         {% elif field.label == 'Dod' %}
-                                            {% render_field field class="form-control" value=pedigree.dod type="date" %}
+                                            {% render_field field class="form-control" type="date" %}
                                         {% elif field.label == 'Sex' %}
                                             <div class="radio radio-info pt-2">
                                                 {% for option in field %}
-                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label|lower }}" {% if pedigree.sex %}checked{% endif %}>
+                                                    <input type="radio" name="sex" id="{{ option.id_for_label }}" value="{{ option.choice_label|lower }}" {% if pedigree.sex == option.choice_label|lower %}checked{% endif %}>
                                                         <label for="{{ option.id_for_label }}" class="pr-2"> {{ option.choice_label }} </label>
                                                 {% endfor %}
                                         </div>
+                                        {% elif field.label == 'Description' %}
+                                            <textarea name="description" id="id_description" class="form-control" cols="40" rows="10">{{ pedigree.description }}</textarea>
+                                        {% elif field.label == 'Note' %}
+                                            {% render_field field class="form-control" value=pedigree.note %}
                                         {% else %}
                                             {% render_field field class="form-control" %}
                                         {% endif %}
@@ -99,6 +103,96 @@
                             </div>
                             {% endfor %}
                         </div>
+                        <h3 class="box-title">Attributes</h3>
+                        <hr class="mt-0 mb-5">
+                        <!--/row-->
+                        {% if attributes_form.errors %}
+                            {% for field in attributes_form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ field.label }}: {{ error }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in attributes_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            {% for hidden in attributes_form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+
+                            {% for field in attributes_form.visible_fields %}
+                                {% if field.name != 'reg_no'%}
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
+                                            <div class="col-md-9">
+                                                {% if field.label == 'Breed' %}
+                                                    <div id="breeds">
+                                                        <input class="typeahead form-control" name='{{ field.name }}' type="text" placeholder="{{ pedigree.attribute.breed.breed_name }}" value="{{ pedigree.attribute.breed.breed_name }}">
+                                                    </div>
+                                                {% elif field.label == 'Eggs per week' %}
+                                                    {% render_field field class="form-control" value=pedigree.attribute.eggs_per_week %}
+                                                {% elif field.label == 'Prize winning' %}
+                                                    {% for option in field %}
+                                                        <div class="checkbox checkbox-success pt-2">
+                                                            <input id="{{ field.label }}" name='{{ field.name }}' value="1" type="checkbox" {% if pedigree.attribute.prize_winning %}checked{% endif %}>
+                                                            <label for="{{ field.label }}"></label>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
+                                                {% for error in field.errors %}
+                                                  <span class="help-block">{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title">Images</h3>
+                        <hr class="mt-0 mb-5">
+                        <!--/row-->
+                        {% if image_form.errors %}
+                            {% for field in image_form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ field.label }}: {{ error }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in image_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            {% for hidden in image_form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+                            {% for field in image_form.visible_fields %}
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 text-right col-form-label">{{ field.label }}</label>
+                                        <div class="col-md-9">
+                                            {{ field }}
+                                            {% for error in field.errors %}
+                                              <span class="help-block">{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!--/row-->
+                    </div>
                     <hr>
                     <div class="form-actions">
                         <div class="row">
