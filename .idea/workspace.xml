@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pedigree/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="7" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="7" />
+            <state relative-caret-position="585">
+              <caret line="42" column="111" selection-start-line="42" selection-start-column="102" selection-end-line="42" selection-end-column="111" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -28,11 +28,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/breed/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="14" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pedigree/templates/pedigree.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="209" column="81" selection-start-line="209" selection-start-column="81" selection-end-line="209" selection-end-column="81" />
+            <state relative-caret-position="577">
+              <caret line="221" column="52" selection-start-line="221" selection-start-column="52" selection-end-line="221" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -240,22 +249,6 @@
               <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
-              <item name="pedigree" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
-              <item name="pedigree" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pedigree_demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pedigree_demo" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -337,7 +330,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1592827" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -459,7 +451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/breed/models.py" />
     <entry file="file://$PROJECT_DIR$/breed/templates/breeds.html" />
     <entry file="file://$PROJECT_DIR$/breeder/templates/breeders.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -648,10 +639,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/breed/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pedigree/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="7" />
+        <state relative-caret-position="585">
+          <caret line="42" column="111" selection-start-line="42" selection-start-column="102" selection-end-line="42" selection-end-column="111" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -660,8 +658,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pedigree/templates/pedigree.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="209" column="81" selection-start-line="209" selection-start-column="81" selection-end-line="209" selection-end-column="81" />
+        <state relative-caret-position="577">
+          <caret line="221" column="52" selection-start-line="221" selection-start-column="52" selection-end-line="221" selection-end-column="52" />
         </state>
       </provider>
     </entry>
