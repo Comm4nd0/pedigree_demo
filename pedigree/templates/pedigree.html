@@ -12,6 +12,10 @@ vertical-align: middle;
 .left-sidebar {
     z-index: 10 !important;
 }
+
+.feeds li span {
+    font-size: 14px;
+
 </style>
 
     <!-- ============================================================== -->
@@ -33,143 +37,187 @@ vertical-align: middle;
     </div>
     <!-- ============================================================== -->
 
-<div class="">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">{{ lvl1.name }}</h4>
+<div class="row">
+    <div class="col-md-8 col-lg-8 col-xlg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{ lvl1.name }}</h4>
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs customtab" role="tablist">
-                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#stats" role="tab"><span class="hidden-sm-up"><i class="ti-dashboard"></i></span> <span class="hidden-xs-down">Stats</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#images" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#children" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-human-child"></i></span> <span class="hidden-xs-down">Children</span></a> </li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane p-3 active" id="profile" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-4"><img src="{% for image in lvl1.images.all %}
-                                                            {% if forloop.first %}
-                                                                {{ image.image.url }}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                        " class="img-responsive thumbnail mr-3">    </div>
-                        <div class="col-md-8">
-                            {{ lvl1.description|linebreaks }}
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane p-3" id="stats" role="tabpanel">
-                    <!-- Row -->
-                <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Row -->
-                                <div class="row">
-                                    <div class="col-8"><span class="display-6">{{ lvl1.attribute.eggs_per_week }}</span>
-                                        <h6>Eggs Laid Per Week</h6></div>
-                                    <div class="col-4 align-self-center text-right  pl-0">
-                                        <div id="sparklinedash3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Row -->
-                                <div class="row">
-                                    <div class="col-8"><span class="display-6">370 <i class="ti-angle-up font-14 text-success"></i></span>
-                                        <h6>Offspring</h6></div>
-                                    <div class="col-4 align-self-center text-right pl-0">
-                                        <div id="sparklinedash"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Row -->
-                                <div class="row">
-                                    <div class="col-8"><span class="display-7">{{ lvl1.dob }} </span>
-                                        <h6>Date Of Birth</h6></div>
-                                    <div class="col-4 align-self-center text-right pl-0">
-                                        <div id="sparklinedash2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Row -->
-                                <div class="row">
-                                    {% if lvl1.dod %}
-                                    <div class="col-8"><span class="display-7">{{ lvl1.dod }}</span>
-                                        <h6>Date Of Death</h6></div>
-                                    <div class="col-4 align-self-center text-right pl-0">
-                                        <div id="sparklinedash4"></div>
-                                    </div>
-                                    {% else %}
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Row -->
-
-                </div>
-                <div class="tab-pane p-3" id="images" role="tabpanel">
-                    <div class="card-columns el-element-overlay">
-                        {% for image in lvl1.images.all %}
-                        <div class="card">
-                            <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1">
-                                    <a class="image-popup-vertical-fit" href="{{ image.image.url }}"> <img src="{{ image.image.url }}" alt="user" /> </a>
-                                </div>
-                                <div class="el-card-content">
-                                    <h3 class="box-title">{{ image.title }}</h3> <small>{{ image.description }}</small>
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="tab-pane p-3" id="children" role="tabpanel">
-                    {% if children %}
-                        {% for child in children.all %}
-                            <div class="card" style="width: 20rem;">
-                              <img class="card-img-top" src="{% for image in child.images.all %}
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs customtab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-info"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#stats" role="tab"><span class="hidden-sm-up"><i class="ti-dashboard"></i></span> <span class="hidden-xs-down">Stats</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#images" role="tab"><span class="hidden-sm-up"><i class="ti-image"></i></span> <span class="hidden-xs-down">Images</span></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#children" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-human-child"></i></span> <span class="hidden-xs-down">Children</span></a> </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane p-3 active" id="profile" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-4"><img src="{% for image in lvl1.images.all %}
                                                                 {% if forloop.first %}
                                                                     {{ image.image.url }}
                                                                 {% endif %}
-                                                            {% endfor %}" alt="Card image cap">
-                              <div class="card-body">
-                                <h4 class="card-title">{{ child.name }}</h4>
-                                <p class="card-text">{{ child.description|truncatewords:"50" }}</p>
-                                <a href="{% url 'pedigree' child.id %}"
-                                   class="btn btn-outline-info waves-effect waves-light" role="button">
-                                <span class="btn-label"><i class="{% if child.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ child.reg_no }}</strong></a>
-                              </div>
+                                                            {% endfor %}
+                                                            " class="img-responsive thumbnail mr-3">    </div>
+                            <div class="col-md-8">
+                                {{ lvl1.description|linebreaks }}
                             </div>
-                        {% endfor %}
-                    {% else %}
-                    <h4>No children for this pedigree, add one?</h4>
-                    {% include 'add_new_pedigree.html' %}
-                    {% endif %}
+                        </div>
+                    </div>
+                    <div class="tab-pane p-3" id="stats" role="tabpanel">
+                        <!-- Row -->
+                    <div class="row">
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- Row -->
+                                    <div class="row">
+                                        <div class="col-8"><span class="display-6">{{ lvl1.attribute.eggs_per_week }}</span>
+                                            <h6>Eggs Laid Per Week</h6></div>
+                                        <div class="col-4 align-self-center text-right  pl-0">
+                                            <div id="sparklinedash3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- Row -->
+                                    <div class="row">
+                                        <div class="col-8"><span class="display-6">370 <i class="ti-angle-up font-14 text-success"></i></span>
+                                            <h6>Offspring</h6></div>
+                                        <div class="col-4 align-self-center text-right pl-0">
+                                            <div id="sparklinedash"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- Row -->
+                                    <div class="row">
+                                        <div class="col-8"><span class="display-7">{{ lvl1.dob }} </span>
+                                            <h6>Date Of Birth</h6></div>
+                                        <div class="col-4 align-self-center text-right pl-0">
+                                            <div id="sparklinedash2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- Row -->
+                                    <div class="row">
+                                        {% if lvl1.dod %}
+                                        <div class="col-8"><span class="display-7">{{ lvl1.dod }}</span>
+                                            <h6>Date Of Death</h6></div>
+                                        <div class="col-4 align-self-center text-right pl-0">
+                                            <div id="sparklinedash4"></div>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row -->
+
+                    </div>
+                    <div class="tab-pane p-3" id="images" role="tabpanel">
+                        <div class="card-columns el-element-overlay">
+                            {% for image in lvl1.images.all %}
+                            <div class="card">
+                                <div class="el-card-item">
+                                    <div class="el-card-avatar el-overlay-1">
+                                        <a class="image-popup-vertical-fit" href="{{ image.image.url }}"> <img src="{{ image.image.url }}" alt="user" /> </a>
+                                    </div>
+                                    <div class="el-card-content">
+                                        <h3 class="box-title">{{ image.title }}</h3> <small>{{ image.description }}</small>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane p-3" id="children" role="tabpanel">
+                        {% if children %}
+                            {% for child in children.all %}
+                                <div class="card" style="width: 20rem;">
+                                  <img class="card-img-top" src="{% for image in child.images.all %}
+                                                                    {% if forloop.first %}
+                                                                        {{ image.image.url }}
+                                                                    {% endif %}
+                                                                {% endfor %}" alt="Card image cap">
+                                  <div class="card-body">
+                                    <h4 class="card-title">{{ child.name }}</h4>
+                                    <p class="card-text">{{ child.description|truncatewords:"50" }}</p>
+                                    <a href="{% url 'pedigree' child.id %}"
+                                       class="btn btn-outline-info waves-effect waves-light" role="button">
+                                    <span class="btn-label"><i class="{% if child.sex == 'female' %}icon-symble-female{% else %}icon-symbol-male{% endif %}"></i></span> <strong>{{ child.reg_no }}</strong></a>
+                                  </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                        <h4>No children for this pedigree, add one?</h4>
+                        {% include 'add_new_pedigree.html' %}
+                        {% endif %}
+                    </div>
                 </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-xlg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Details</h4>
+                <ul class="feeds">
+                    {% if lvl1.breeder.prefix %}
+                    <li>
+                        <div class="bg-light-info"><i class="fas fa-user-plus"></i></div> Breeder <span class=""><button class="btn btn-xs btn-outline-dark">{{ lvl1.breeder.prefix }}</button> </span></li>
+                    {% endif %}
+                    {% if lvl1.current_owner.prefix %}
+                    <li>
+                        <div class="bg-light-success"><i class="fas fa-user"></i></div> Owner <span class=""><button class="btn btn-xs btn-outline-dark">{{ lvl1.current_owner.prefix }}</button> </span></li>
+                    {% endif %}
+                    {% if lvl1.reg_no %}
+                    <li>
+                        <div class="bg-light-warning"><i class="far fa-id-card"></i></div> Registration Numbers.<span class="font-weight-normal">{{ lvl1.reg_no }}</span></li>
+                    {% endif %}
+                    {% if lvl1.name %}
+                    <li>
+                        <div class="bg-light-danger"><i class="mdi mdi-emoticon"></i></div> Name<span class="font-weight-normal">{{ lvl1.name }}</span></li>
+                    {% endif %}
+                    {% if lvl1.date_of_registration %}
+                    <li>
+                        <div class="bg-light-inverse"><i class="mdi mdi-clipboard-outline"></i></div> Date of Registration <span class="font-weight-normal">{{ lvl1.date_of_registration }}</span></li>
+                    {% endif %}
+                    {% if lvl1.dob %}
+                    <li>
+                        <div class="bg-light-info"><i class="mdi mdi-cake-variant"></i></div> Date of Birth <span class="font-weight-normal">{{ lvl1.dob }}</span></li>
+                    {% endif %}
+                    {% if lvl1.dod %}
+                    <li>
+                        <div class="bg-light-danger"><i class="mdi mdi-skull"></i></div> Date of Death<span class="font-weight-normal">{{ lvl1.dod }}</span></li>
+                    {% endif %}
+                    {% if lvl1.sex %}
+                    <li>
+                        <div class="bg-light-inverse"><i class="fas fa-venus-mars"></i></div> Sex <span class="font-weight-normal">{{ lvl1.sex|title }}</span></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>
