@@ -314,7 +314,7 @@ def edit_pedigree_form(request, id):
                 fs.url(filename)
                 new_pedigree_image.image = filename
                 new_pedigree_image.save()
-                
+
             for image in PedigreeImage.objects.all():
                 img = request.POST.get('{}-{}'.format(id, image.id))
                 if img:
