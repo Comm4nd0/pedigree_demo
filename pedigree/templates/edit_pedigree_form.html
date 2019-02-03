@@ -2,6 +2,67 @@
 {% load widget_tweaks %}
 {% block content %}
 
+<style>
+    ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline-block;
+}
+
+.removeImageCheck {
+  display: none;
+}
+
+.removeImages {
+  border: 1px solid #fff;
+  padding: 10px;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.removeImages:before {
+  background-color: white;
+  color: white;
+  content: " ";
+  border-radius: 50%;
+  border: 1px solid #f009;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  transition-duration: 0.4s;
+  transform: scale(0);
+
+}
+
+.removeImages img {
+  height: 100px;
+  width: 100px;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+:checked + .removeImages {
+  border-color: #ddd;
+}
+
+:checked + .removeImages:before {
+  content: "x";
+  background-color: #f009;
+  transform: scale(1);
+}
+
+:checked + .removeImages img {
+  transform: scale(0.9);
+  box-shadow: 0 0 5px #f009;
+}
+</style>
+
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
@@ -188,8 +249,22 @@
                                               <span class="help-block">{{ error }}</span>
                                             {% endfor %}
                                         </div>
+                                    </div>
                                 </div>
                             {% endfor %}
+                            <hr>
+                            <div class="col-lg-12 col-md-12">
+                                    <div class="form-group row">
+                                        <h4 class="text-muted">Select images to be removed</h4>
+                                        <div class="pt-2">
+                                            {% for image in pedigree.images.all %}
+                                                <input type="checkbox" name='{{ pedigree.id }}-{{ image.id }}' class="removeImageCheck" id="{{ image.id }}" />
+                                                <label class="removeImages" for="{{ image.id }}"><img src="{{ image.image.url }}" /></label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                            </div>
+
                         </div>
                         <!--/row-->
                     </div>
