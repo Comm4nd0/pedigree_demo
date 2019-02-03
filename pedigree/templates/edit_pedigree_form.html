@@ -76,11 +76,11 @@
                                         {% elif field.label == 'Name' %}
                                             {% render_field field class="form-control" value=pedigree.name %}
                                         {% elif field.label == 'Date of registration' %}
-                                             {% render_field field class="form-control" type="date" %}
+                                             {% render_field field class="form-control" type="date" value=pedigree.date_of_registration %}
                                         {% elif field.label == 'Date of birth' %}
-                                            {% render_field field class="form-control" type="date" %}
+                                            {% render_field field class="form-control" type="date" value=pedigree.dob %}
                                         {% elif field.label == 'Dod' %}
-                                            {% render_field field class="form-control" type="date" %}
+                                            {% render_field field class="form-control" type="date" value=pedigree.dod%}
                                         {% elif field.label == 'Sex' %}
                                             <div class="radio radio-info pt-2">
                                                 {% for option in field %}

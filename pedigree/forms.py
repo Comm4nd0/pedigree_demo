@@ -1,5 +1,5 @@
 from django import forms
-import datetime
+
 
 class PedigreeForm(forms.Form):
 
@@ -14,13 +14,11 @@ class PedigreeForm(forms.Form):
     name = forms.CharField(label='Name', required=False)
     name.widget.attrs['class'] = 'form-control'
 
-    date_of_registration = forms.DateField(initial=datetime.date.today, required=False,
-                                           widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    date_of_registration = forms.DateField(required=False, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     date_of_registration.widget.attrs['class'] = 'form-control'
     date_of_registration.widget.attrs['placeholder'] = 'dd/mm/yyyy'
 
-    date_of_birth = forms.DateField(initial=datetime.date.today, required=False,
-                                    widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    date_of_birth = forms.DateField(required=False, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     date_of_birth.widget.attrs['class'] = 'form-control'
 
     GENDERS = [
@@ -29,8 +27,7 @@ class PedigreeForm(forms.Form):
     ]
     sex = forms.ChoiceField(choices=GENDERS, widget=forms.RadioSelect(attrs={'class': 'radio radio-info'}), required=False)
 
-    date_of_death = forms.DateField(initial=datetime.date.today, required=False,
-                                           widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    date_of_death = forms.DateField(required=False, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
     date_of_death.widget.attrs['class'] = 'form-control'
     date_of_death.widget.attrs['placeholder'] = 'dd/mm/yyyy'
 
