@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from .models import Pedigree, PedigreeAttributes, PedigreeImage
@@ -13,8 +13,13 @@ from jinja2 import Environment, FileSystemLoader
 from django.core.files.storage import FileSystemStorage
 
 
+def is_editor(user):
+    return user.groups.filter(name='editor').exists() or user.is_superuser
+
+
 @login_required(login_url="/account/login")
 def home(request):
+    editor = is_editor(request.user)
     total_pedigrees = Pedigree.objects.all().count()
     total_breeders = Breeder.objects.all().count()
     top_pedigrees = Pedigree.objects.all().order_by('-date_added')[:5]
@@ -29,13 +34,16 @@ def home(request):
     return render(request, 'dashboard.html', {'total_pedigrees': total_pedigrees,
                                               'total_breeders': total_breeders,
                                               'top_pedigrees': top_pedigrees,
-                                              'top_breeders': top_breeders,})
+                                              'top_breeders': top_breeders,
+                                              'editor': editor})
 
 
 @login_required(login_url="/account/login")
 def search(request):
+    editor = is_editor(request.user)
     pedigrees = Pedigree.objects.all()
-    return render(request, 'search.html', {'pedigrees': pedigrees})
+    return render(request, 'search.html', {'pedigrees': pedigrees,
+                                           'editor': editor})
 
 
 
@@ -43,6 +51,8 @@ class PedigreeBase(LoginRequiredMixin, TemplateView):
     login_url = '/account/login'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        context['editor'] = is_editor(self.request.user)
 
         context['lvl1'] = Pedigree.objects.get(id=self.kwargs['pedigree_id'])
 
@@ -99,6 +109,7 @@ class ShowPedigree(PedigreeBase):
 @login_required(login_url="/account/login")
 def search_results(request):
     if request.POST:
+        editor = is_editor(request.user)
         search_string = request.POST['search']
 
         # lvl 1
@@ -109,12 +120,14 @@ def search_results(request):
             error = "No pedigrees found using: "
             return render(request, 'search.html', {'breeders': breeders,
                                                     'error': error,
-                                                    'search_string': search_string})
+                                                    'search_string': search_string,
+                                                       'editor': editor})
 
 
         if len(results) > 1:
             return render(request, 'multiple_results.html', {'search_string': search_string,
-                                                        'results': results})
+                                                        'results': results,
+                                                       'editor': editor})
         else:
             try:
                 lvl1 = Pedigree.objects.get(Q(reg_no__icontains=search_string.upper()) | Q(name__icontains=search_string))
@@ -123,12 +136,14 @@ def search_results(request):
                 error = "No pedigrees found using: "
                 return render(request, 'search.html', {'breeders': breeders,
                                                        'error': error,
-                                                       'search_string': search_string})
+                                                       'search_string': search_string,
+                                                       'editor': editor})
 
         return redirect('pedigree', pedigree_id=lvl1.id)
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def new_pedigree_form(request):
     pedigree_objs = Pedigree.objects.all()
     breeder_objs = Breeder.objects.all()
@@ -233,6 +248,7 @@ def new_pedigree_form(request):
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def edit_pedigree_form(request, id):
     pedigree = Pedigree.objects.get(id__exact=int(id))
 
@@ -338,6 +354,7 @@ def edit_pedigree_form(request, id):
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def goat_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')

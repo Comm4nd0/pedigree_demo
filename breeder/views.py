@@ -1,28 +1,37 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Breeder
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from pedigree.models import Pedigree
 from .forms import BreederForm
 import csv
 
 
+def is_editor(user):
+    return user.groups.filter(name='editor').exists() or user.is_superuser
+
+
 @login_required(login_url="/account/login")
 def breeder(request, breeder):
+    editor = is_editor(request.user)
     breeder = Breeder.objects.get(prefix=breeder)
     pedigrees = Pedigree.objects.filter(breeder__prefix__exact=breeder)
     owned = Pedigree.objects.filter(current_owner__prefix__exact=breeder)
     return render(request, 'breeder.html', {'breeder': breeder,
                                             'pedigrees': pedigrees,
-                                            'owned': owned})
+                                            'owned': owned,
+                                            'editor': editor})
 
 
 @login_required(login_url="/account/login")
 def breeders(request):
+    editor = is_editor(request.user)
     breeders = Breeder.objects
-    return render(request, 'breeders.html', {'breeders': breeders})
+    return render(request, 'breeders.html', {'breeders': breeders,
+                                             'editor': editor})
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def breeder_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
@@ -51,6 +60,7 @@ def breeder_csv(request):
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def new_breeder_form(request):
     breeder_form = BreederForm(request.POST or None, request.FILES or None)
 
@@ -76,6 +86,7 @@ def new_breeder_form(request):
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def edit_breeder_form(request, breeder_id):
     breeder = get_object_or_404(Breeder, id=breeder_id)
     breeder_form = BreederForm(request.POST or None, request.FILES or None, instance=breeder)

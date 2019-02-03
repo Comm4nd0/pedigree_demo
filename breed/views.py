@@ -1,16 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Breed
 from .forms import BreedForm
 
 
+def is_editor(user):
+    return user.groups.filter(name='editor').exists() or user.is_superuser
+
+
 @login_required(login_url="/account/login")
 def breeds(request):
+    editor = is_editor(request.user)
     breeds = Breed.objects
-    return render(request, 'breeds.html', {'breeds': breeds})
+    return render(request, 'breeds.html', {'breeds': breeds,
+                                           'editor': editor})
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def new_breed_form(request):
     breed_form = BreedForm(request.POST or None, request.FILES or None)
 
@@ -30,6 +37,7 @@ def new_breed_form(request):
 
 
 @login_required(login_url="/account/login")
+@user_passes_test(is_editor)
 def edit_breed_form(request, breed_id):
     breed = get_object_or_404(Breed, id=breed_id)
     breed_form = BreedForm(request.POST or None, request.FILES or None, instance=breed)

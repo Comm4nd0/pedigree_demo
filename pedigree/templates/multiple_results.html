@@ -1,29 +1,67 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="pt-1">
-    <form method="POST" action="{% url 'results' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-row">
-            <div class="col-auto">
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <i class="fas fa-search"></i>
+<div class="row page-titles">
+    <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">Pedigree Search</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'pedigree_search' %}">Pedigree</a></li>
+                <li class="breadcrumb-item active">Search results</li>
+            </ol>
+        </div>
+    <div class="col-md-6 col-4 align-self-center">
+
+        {% if editor %}
+            <a href="{% url 'new_pedigree_form' %}" class="btn float-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create
+            </a>
+
+        {% else %}
+            <div id="login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Close</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>You need to be an editor to create a new pedigree.</p>
+                            {% include 'login_form.html' %}
                         </div>
                     </div>
-                    <input type="text" name="search" class="form-control" id="search"
-                           aria-describedby="searchHelp"
-                           placeholder="Search...">
                 </div>
             </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-        </div>
-    </form>
+            <!-- /.modal -->
+            <button class="btn float-right hidden-sm-down btn-success" data-toggle="modal" data-target="#login"><i class="mdi mdi-plus-circle"></i> Create</button>
+        {% endif %}
+
+    </div>
 </div>
 <div class="container pt-5">
+    <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Search for a pedigree</h4>
+                    <h6 class="card-subtitle">Use the search box below to type your query.</h6>
+                    <form class="floating-labels m-t-40" method="POST" action="{% url 'results' %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group m-b-40">
+                            <input type="text" class="form-control input-lg" name="search" id="search" required><span
+                                class="bar"></span>
+                            <label for="search">Search...</label>
+                            <br>
+                            {% if error %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{ error }}<strong>{{ search_string }}</strong>.
+                                </div>
+                            {% endif %}
+                            <button type="submit" class="btn btn-outline-success">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <h2 class="featurette-heading">Search Results: {{ search_string }}</h2>
 
