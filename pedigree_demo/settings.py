@@ -10,6 +10,7 @@ INSTALLED_APPS = [
     'breeder',
     'breed',
     'account',
+    'support',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',

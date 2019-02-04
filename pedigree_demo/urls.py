@@ -11,4 +11,5 @@ urlpatterns = [
     path('breeders/', include('breeder.urls')),
     path('breeds/', include('breed.urls')),
     path('account/', include('account.urls')),
+    path('support/', include('support.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
